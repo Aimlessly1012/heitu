@@ -15,17 +15,14 @@ jobs:
           # 如果配置 themeConfig.lastUpdated 为 false，则不需要添加该参数以加快检出速度
           fetch-depth: 0
 
-      # 下载node，我这里指定了15.x，这个版本可随意，高于dumi规定的node版本即可
-      - name: Use Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: 16.x
+
 
       - name: Install dependencies
         run: npm install
       - name: Build with dumi
         # 文档编译命令，如果是 react 模板需要修改为 npm run docs:build
         run: npm run build
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:

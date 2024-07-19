@@ -1,5 +1,5 @@
 {
-  "name": "app",
+  "name": "heitu",
   "version": "0.0.1",
   "description": "A react library developed with dumi",
   "module": "dist/index.js",
@@ -69,5 +69,10 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "stylelint": "^14.9.1"
+  },
+  "dependencies": {
+    "babel-plugin-import": "^1.13.8",
+    "babel-plugin-root-import": "^5.1.0",
+    "eslint-import-resolver-babel-plugin-root-import": "^1.1.1"
   }
 }

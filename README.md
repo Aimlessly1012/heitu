@@ -1,17 +1,5 @@
-# app
+# heitu-hook
 
-[![NPM version](https://img.shields.io/npm/v/app.svg?style=flat)](https://npmjs.org/package/app)
-[![NPM downloads](http://img.shields.io/npm/dm/app.svg?style=flat)](https://npmjs.org/package/app)
-
-A react library developed with dumi
-
-## Usage
-
-TODO
-
-## Options
-
-TODO
 
 ## Development
 

@@ -7,16 +7,10 @@
     "jsx": "react",
     "baseUrl": "./",
     "paths": {
-      "@@/*": [
-        ".dumi/tmp/*"
-      ],
-      "heitu-hook": [
-        "src",
-      ]
+      "@@/*": [".dumi/tmp/*"],
+      "heitu-hook": ["src"],
+      "heitu-hook/*": ["src/*", "*"]
     }
   },
-  "include": [
-    ".dumirc.ts",
-    "src/**/*"
-  ]
+  "include": [".dumirc.ts", "src/**/*"]
 }

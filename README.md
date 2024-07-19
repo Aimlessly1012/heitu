@@ -1,29 +1,41 @@
 # heitu-hook
 
+[![NPM version](https://img.shields.io/npm/v/heitu-hook.svg?style=flat)](https://npmjs.org/package/heitu-hook)
+[![NPM downloads](http://img.shields.io/npm/dm/heitu-hook.svg?style=flat)](https://npmjs.org/package/heitu-hook)
+
+diy hook
+
+## Usage
+
+TODO
+
+## Options
+
+TODO
 
 ## Development
 
 ```bash
 # install dependencies
-$ npm install
+$ yarn install
 
 # develop library by docs demo
-$ npm start
+$ yarn start
 
 # build library source code
-$ npm run build
+$ yarn run build
 
 # build library source code in watch mode
-$ npm run build:watch
+$ yarn run build:watch
 
 # build docs
-$ npm run docs:build
+$ yarn run docs:build
 
 # Locally preview the production build.
-$ npm run docs:preview
+$ yarn run docs:preview
 
 # check your project for potential problems
-$ npm run doctor
+$ yarn run doctor
 ```
 
 ## LICENSE

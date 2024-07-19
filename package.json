@@ -1,7 +1,7 @@
 {
-  "name": "heitu",
+  "name": "heitu-hook",
   "version": "0.0.1",
-  "description": "A react library developed with dumi",
+  "description": "diy hook",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -10,8 +10,8 @@
     "build": "father build",
     "build:watch": "father dev",
     "docs:build": "dumi build",
-    "deploy": "gh-pages -d docs-dist",
     "docs:preview": "dumi preview",
+    "deploy": "gh-pages -d dist",
     "prepare": "husky install && dumi setup",
     "doctor": "father doctor",
     "lint": "npm run lint:es && npm run lint:css",
@@ -19,7 +19,9 @@
     "lint:es": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
     "prepublishOnly": "father doctor && npm run build"
   },
-  "authors": [],
+  "authors": [
+    "peco"
+  ],
   "license": "MIT",
   "files": [
     "dist"
@@ -71,10 +73,5 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "stylelint": "^14.9.1"
-  },
-  "dependencies": {
-    "babel-plugin-import": "^1.13.8",
-    "babel-plugin-root-import": "^5.1.0",
-    "eslint-import-resolver-babel-plugin-root-import": "^1.1.1"
   }
 }

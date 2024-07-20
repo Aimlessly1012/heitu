@@ -8,7 +8,7 @@ export default defineConfig({
   },
   mfsu: false,
   // runtimePublicPath: {},
-  base: repo,
-  publicPath: repo,
+  base: process.env.NODE_ENV === 'production' ? `/${repo}/` : '/',
+  publicPath: process.env.NODE_ENV === 'production' ? `/${repo}/` : '/',
   exportStatic: {}, // 将所有路由输出为 HTML 目录结构，以免刷新页面时 404
 });

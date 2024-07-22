@@ -2,6 +2,8 @@
 
 ## 描述
 
+获取元素是否在可视范围内的 hook
+
 ## 演示
 
 <!-- <code src="./demo.tsx" description="demo 描述"></code> -->
@@ -30,8 +32,16 @@ export default () => {
 };
 ```
 
-## Option
+## Arguments
 
-| name | description | type | default |
-| ---- | ----------- | ---- | ------- |
-|      |             |      |         |
+| name    | description              | type                     | default                                        |
+|---------|--------------------------|--------------------------|------------------------------------------------|
+| options | 绑定元素的基础用作依赖 | IntersectionObserverInit | { root: null,rootMargin: '0px',threshold: 1,}, |
+| triggerOnce  | 触发一次         | boolean                  | false                                          |
+
+## return
+
+| name      | description              | type                                     | default |
+|-----------|--------------------------|------------------------------------------|---------|
+| targetRef | 用于绑定所作用元素的 ref | React.MutableRefObject<'HTMLElement' ,null> | -       |
+| inView    | 是否在可视范围内         | boolean                                  | false   |

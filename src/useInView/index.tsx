@@ -1,8 +1,5 @@
-
 import { useEffect, useRef, useState } from 'react';
 import { TargetRef } from './interface';
-
-
 
 const useInView = (
   options: IntersectionObserverInit = {
@@ -10,7 +7,7 @@ const useInView = (
     rootMargin: '0px',
     threshold: 1,
   },
-  triggerOnce: boolean = false
+  triggerOnce: boolean = false,
 ): [TargetRef, boolean] => {
   const [inView, setInView] = useState(false);
   const targetRef: TargetRef = useRef<HTMLElement | null>(null);
@@ -27,7 +24,7 @@ const useInView = (
           setInView(false);
         }
       });
-    });
+    }, options);
 
     if (targetRef?.current) {
       observer.observe(targetRef.current);
@@ -38,10 +35,7 @@ const useInView = (
         observer.unobserve(targetRef.current);
       }
     };
-  }, [
-    options,
-    triggerOnce
-  ]);
+  }, [options, triggerOnce]);
 
   return [targetRef, inView];
 };

@@ -1,1 +1,3 @@
-This is a hooks example.
+---
+title: Hooks
+---

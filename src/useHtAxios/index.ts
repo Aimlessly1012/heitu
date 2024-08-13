@@ -74,7 +74,7 @@ const useHtAxios = ({
   ): AxiosPromise<R> {
     return axiosClient.request({
       url,
-      method: 'delet',
+      method: 'delete',
       params: data,
       ...config,
     });

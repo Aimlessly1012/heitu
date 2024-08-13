@@ -11,36 +11,37 @@
 ```tsx
 import React, { LegacyRef, useEffect } from 'react';
 import { useCountDown } from 'heitu-hook';
+import { Button } from 'antd';
 
 export default () => {
   const [seconds,startCountDown,stopCountDown] = useCountDown();
   return (
     <div>
       {seconds}
-      <button
+      <Button
         type="default"
         onClick={() => {
           startCountDown(60)
         }}
       >
         开始
-      </button>
-      <button
+      </Button>
+      <Button
         type="default"
         onClick={() => {
           stopCountDown();
         }}
       >
         暂停
-      </button>
-      <button
+      </Button>
+      <Button
         type="default"
         onClick={() => {
          startCountDown()
         }}
       >
         继续
-      </button>
+      </Button>
     </div>
   );
 };

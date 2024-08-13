@@ -4,7 +4,13 @@ const repo = 'heitu-hook';
 export default defineConfig({
   outputPath: 'docs-dist',
   themeConfig: {
-    name: 'heitu-hook',
+    name: 'HeiTu',
+    editLink: false,
+    logo: '/HeiTu.png',
+    // nav: [{ title: 'hooks', link: '/hooks' }],
+    // sidebar: [{ title: 'hooks', link: '/hooks' }],
+    // footer: false,
+    prefersColor: { default: 'dark', switch: false },
   },
   mfsu: false,
   // runtimePublicPath: {},

@@ -1,6 +1,6 @@
 {
   "name": "heitu-hook",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "diy hook",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -79,6 +79,8 @@
     "@types/lodash-es": "^4.17.12",
     "@types/qs": "^6.9.15",
     "@types/urijs": "^1.19.25",
+    "antd": "^5.20.1",
+    "axios": "^1.7.2",
     "fflate": "^0.8.2",
     "js-cookie": "^3.0.5",
     "lodash-es": "^4.17.21",

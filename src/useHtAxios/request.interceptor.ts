@@ -1,8 +1,12 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import axios, {
+  AxiosInstance,
+  AxiosRequestConfig,
+  InternalAxiosRequestConfig,
+} from 'axios';
 import URI from 'urijs';
 import { HtRequestConfig } from './defaultConfig';
-import { addBase64ForConfig } from './interceptors/base64';
-import { addGzipForConfig } from './interceptors/gzip';
+// import { addBase64ForConfig } from './interceptors/base64';
+// import { addGzipForConfig } from './interceptors/gzip';
 import { deepTrimData } from './utils';
 
 export const source = axios.CancelToken.source();
@@ -45,13 +49,13 @@ export const requestInterceptor: RequestInterceptorInterface = (
     delete config.data;
   }
 
-  if (config.gzip) {
-    addGzipForConfig(config, config.gzipThresholdSize);
-  }
+  // if (config.gzip) {
+  //   addGzipForConfig(config, config.gzipThresholdSize);
+  // }
 
-  if (config.base64) {
-    addBase64ForConfig(config);
-  }
+  // if (config.base64) {
+  //   addBase64ForConfig(config);
+  // }
 
   return config;
 };
@@ -67,7 +71,9 @@ export const requestInterceptorUse = (
     // 添加请求拦截器
     axiosClient.interceptors.request.use(
       (config: AxiosRequestConfig) => {
-        return requestInterceptorsCallback(config);
+        return requestInterceptorsCallback(config) as
+          | InternalAxiosRequestConfig<any>
+          | Promise<InternalAxiosRequestConfig<any>>;
       },
       (error) => {
         return Promise.reject(error);
@@ -77,7 +83,9 @@ export const requestInterceptorUse = (
   // 添加请求拦截器
   axiosClient.interceptors.request.use(
     (config: AxiosRequestConfig) => {
-      return requestInterceptor(config);
+      return requestInterceptor(config) as
+        | InternalAxiosRequestConfig<any>
+        | Promise<InternalAxiosRequestConfig<any>>;
     },
     (error) => {
       return Promise.reject(error);

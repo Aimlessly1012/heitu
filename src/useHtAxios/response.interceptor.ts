@@ -4,7 +4,7 @@
 import type { AxiosInstance, AxiosResponse } from 'axios';
 
 import { HtRequestConfig } from './defaultConfig';
-
+// @ts-ignore
 interface SelfResponse extends AxiosResponse {
   config: HtRequestConfig;
 }

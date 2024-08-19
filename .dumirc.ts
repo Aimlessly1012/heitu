@@ -6,10 +6,10 @@ export default defineConfig({
   themeConfig: {
     name: 'HeiTu',
     editLink: false,
-    logo: '/HeiTu.png',
-    // nav: [{ title: 'hooks', link: '/hooks' }],
-    // sidebar: [{ title: 'hooks', link: '/hooks' }],
-    // footer: false,
+    logo:
+      process.env.NODE_ENV === 'production'
+        ? `/${repo}/HeiTu.png`
+        : '/HeiTu.png',
     prefersColor: { default: 'dark', switch: false },
   },
   mfsu: false,

@@ -1,18 +1,14 @@
-import { useResizeObserver } from 'heitu-hook';
-import React, { useLayoutEffect, useRef } from 'react';
+import { Stage } from 'heitu-hook';
+import React from 'react';
 
 const Index = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const stageRef = useRef(null);
-  useLayoutEffect(() => {
-    // stageRef.current.mount(
-    //   { container: containerRef.current as HTMLDivElement },
-    //   true,
-    // );
-  }, []);
-
-  // useResizeObserver(containerRef, () => stageRef.current.refreshDraw());
-  return <div>123</div>;
+  return (
+    <div>
+      <Stage>
+        {/* <Rect x={x} y={y} width={100} height={100} fillStyle={'red'} /> */}
+      </Stage>
+    </div>
+  );
 };
 
 export default Index;

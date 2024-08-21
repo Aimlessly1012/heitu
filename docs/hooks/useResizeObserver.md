@@ -1,3 +1,11 @@
+---
+group:
+  title: Element
+  order: 2
+
+toc: content
+order: 1
+---
 # useResizeObserver
 
 ## 描述
@@ -6,7 +14,6 @@
 
 ## 演示
 
-<!-- <code src="./demo.tsx" description="demo 描述"></code> -->
 
 ```tsx
 import React, { useRef, useEffect, useState } from 'react';

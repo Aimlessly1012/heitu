@@ -1,19 +1,11 @@
-## 演示
+---
+nav: 
+  title: Canvas
+  order: 2
 
-<code src="./demo.tsx" description="demo 描述"></code>
+---
 
-<!-- ```tsx
-import { Stage } from 'heitu-hook';
-import React from 'react';
+# 安装下载
 
-const Index = () => {
-  return (
-    <div>
-      <Stage />
-    </div>
-  );
-};
+# 使用
 
-export default Index;
-
-``` -->

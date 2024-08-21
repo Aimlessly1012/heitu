@@ -1,12 +1,19 @@
+---
+group:
+  title: Element
+  order: 2
+
+toc: content
+order: 2
+---
 # useElementSize
 
 ## 描述
 
-获取元素是否在可视范围内的 hook
+获取元素尺寸
 
 ## 演示
 
-<!-- <code src="./demo.tsx" description="demo 描述"></code> -->
 
 ```tsx
 import React, { useRef, useEffect } from 'react';

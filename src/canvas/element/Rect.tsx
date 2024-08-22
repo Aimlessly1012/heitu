@@ -24,13 +24,13 @@ const Rect = (props: RectProps) => {
   const parent = useContext(Context);
   const rect = new _Rect(mergeProps);
   const rectRef = useRef(rect);
-
+  console.log(mergeProps.fillStyle);
 
   usePropertyChange(mergeProps, 'width', rectRef.current);
   usePropertyChange(mergeProps, 'height', rectRef.current);
   usePropertyChange(mergeProps, 'x', rectRef.current);
   usePropertyChange(mergeProps, 'y', rectRef.current);
-  usePropertyChange(mergeProps, 'fillColor', rectRef.current);
+  usePropertyChange(mergeProps, 'fillStyle', rectRef.current);
 
   useLayoutEffect(() => {
     parent.appendChild(rectRef.current);

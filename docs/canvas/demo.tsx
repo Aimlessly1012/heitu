@@ -7,7 +7,7 @@ const Index = () => {
   const [width, setWidth] = useState(100);
   const [height, setHeight] = useState(100);
 
-  const [fillStyle, setFillStyle] = useState('black');
+  const [fillStyle, setFillStyle] = useState('red');
   return (
     <div>
       <div style={{ marginTop: '30px' }}>

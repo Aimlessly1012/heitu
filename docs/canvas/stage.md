@@ -13,6 +13,6 @@ order: 1
 ## 描述
 
 ## 演示
-  <code src="./stageDemo"></code>
+  <code src="./demo"></code>
 
 ## API

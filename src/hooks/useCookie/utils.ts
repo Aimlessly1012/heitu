@@ -1,4 +1,4 @@
-import { isBrowser } from "heitu-hook/utils/is";
+import { isBrowser } from "heitu/utils/is";
 import Cookies from 'js-cookie'
 
 function getInitialState(key: string, defaultValue?: string) {

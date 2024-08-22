@@ -18,7 +18,7 @@ order: 4
 
 ```tsx
 import React, { LegacyRef, useEffect } from 'react';
-import { useInfiniteScroll, useInView } from 'heitu-hook';
+import { useInfiniteScroll, useInView } from 'heitu';
 
 function InfiniteScrollTrigger({ hasMore, loadMore }) {
   const [targetRef, inView] = useInView();

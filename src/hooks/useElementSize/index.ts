@@ -1,5 +1,5 @@
-import useResizeObserver from 'heitu-hook/hooks/useResizeObserver';
-import { defaultOptions } from 'heitu-hook/utils/defaults';
+import useResizeObserver from 'heitu/hooks/useResizeObserver';
+import { defaultOptions } from 'heitu/utils/defaults';
 import { useState } from 'react';
 
 const useElementSize = (

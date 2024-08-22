@@ -1,4 +1,4 @@
-import { defaultOptions } from 'heitu-hook/utils/defaults';
+import { defaultOptions } from 'heitu/utils/defaults';
 import { useEffect } from 'react';
 
 const useResizeObserver = (

@@ -1,4 +1,4 @@
-import { Rect, Stage } from 'heitu-hook';
+import { Rect, Stage } from 'heitu';
 import React, { useState } from 'react';
 
 const Index = () => {

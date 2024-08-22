@@ -8,8 +8,8 @@
     "baseUrl": "./",
     "paths": {
       "@@/*": [".dumi/tmp/*"],
-      "heitu-hook": ["src"],
-      "heitu-hook/*": ["src/*", "*"]
+      "heitu": ["src"],
+      "heitu/*": ["src/*", "*"]
     }
   },
   "include": [".dumirc.ts", "src/**/*"]

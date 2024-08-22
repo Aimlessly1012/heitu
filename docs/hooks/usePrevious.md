@@ -17,7 +17,7 @@ order: 1
 
 ```tsx
 import React, { useState, useEffect } from 'react';
-import { usePrevious } from 'heitu-hook';
+import { usePrevious } from 'heitu';
 
 const Child = (props) => {
   const prev = usePrevious(props);

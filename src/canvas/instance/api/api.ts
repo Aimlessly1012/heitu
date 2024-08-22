@@ -1,11 +1,11 @@
-import { sortChildren } from 'heitu-hook/canvas/utils';
+import { sortChildren } from 'heitu/canvas/utils';
 import { dpr } from '../../constant';
 // import { IShape } from '../../type';
 import {
   fillOrStroke,
   setCtxStyleProp,
-} from 'heitu-hook/canvas/utils/renderShape/common';
-import { setRectPath2D } from 'heitu-hook/canvas/utils/renderShape/renderRect';
+} from 'heitu/canvas/utils/renderShape/common';
+import { setRectPath2D } from 'heitu/canvas/utils/renderShape/renderRect';
 import { Stage } from '../stage';
 
 export function drawShapes(ctx: CanvasRenderingContext2D, list: any[]) {

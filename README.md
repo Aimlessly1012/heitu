@@ -1,9 +1,9 @@
-# heitu-hook
+# heitu
 
-[![NPM version](https://img.shields.io/npm/v/heitu-hook.svg?style=flat)](https://npmjs.org/package/heitu-hook)
-[![NPM downloads](http://img.shields.io/npm/dm/heitu-hook.svg?style=flat)](https://npmjs.org/package/heitu-hook)
+[![NPM version](https://img.shields.io/npm/v/heitu.svg?style=flat)](https://npmjs.org/package/heitu)
+[![NPM downloads](http://img.shields.io/npm/dm/heitu.svg?style=flat)](https://npmjs.org/package/heitu)
 
-diy hook
+diy hook canvas component
 
 ## Usage
 

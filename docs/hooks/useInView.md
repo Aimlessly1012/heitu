@@ -18,7 +18,7 @@ order: 3
 
 ```tsx
 import React, { LegacyRef, useEffect } from 'react';
-import { useInView } from 'heitu-hook';
+import { useInView } from 'heitu';
 
 export default () => {
   const [targetRef, inView] = useInView();

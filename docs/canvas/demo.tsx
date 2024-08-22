@@ -1,4 +1,4 @@
-import { Stage } from 'heitu-hook';
+import { Stage } from 'heitu';
 import React from 'react';
 
 const Index = () => {

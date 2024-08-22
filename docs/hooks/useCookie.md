@@ -18,7 +18,7 @@ cookie 简便操作
 
 ```tsx
 import React, { LegacyRef, useEffect } from 'react';
-import { useCookie } from 'heitu-hook';
+import { useCookie } from 'heitu';
 
 export default () => {
   const defaultOption = {

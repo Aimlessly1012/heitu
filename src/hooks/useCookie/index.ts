@@ -1,5 +1,5 @@
-import { defaultOptions } from 'heitu-hook/utils/defaults';
-import { isFunction, isString } from 'heitu-hook/utils/is';
+import { defaultOptions } from 'heitu/utils/defaults';
+import { isFunction, isString } from 'heitu/utils/is';
 import Cookies from 'js-cookie';
 import { useCallback, useEffect, useState } from 'react';
 import { UseCookieState } from './interface';

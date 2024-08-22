@@ -1,7 +1,7 @@
 {
-  "name": "heitu-hook",
+  "name": "heitu",
   "version": "1.0.1",
-  "description": "diy hook",
+  "description": "diy hook canvas component",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {

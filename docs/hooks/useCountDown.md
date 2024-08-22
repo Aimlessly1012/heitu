@@ -18,7 +18,7 @@ order: 2
 
 ```tsx
 import React, { LegacyRef, useEffect } from 'react';
-import { useCountDown } from 'heitu-hook';
+import { useCountDown } from 'heitu';
 import { Button } from 'antd';
 
 export default () => {

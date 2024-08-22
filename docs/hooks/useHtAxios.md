@@ -21,7 +21,7 @@ useHtAxios
 ## 演示
 
 ```tsx
-import { useHtAxios } from 'heitu-hook';
+import { useHtAxios } from 'heitu';
 import React from 'react';
 export default () => {
   const htAxios = useHtAxios({

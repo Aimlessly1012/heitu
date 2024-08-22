@@ -1,5 +1,5 @@
 import { defineConfig } from 'dumi';
-const repo = 'heitu-hook';
+
 
 export default defineConfig({
   outputPath: 'docs-dist',

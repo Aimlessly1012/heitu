@@ -17,7 +17,7 @@ order: 1
 
 ```tsx
 import React, { useRef, useEffect, useState } from 'react';
-import { useResizeObserver } from 'heitu-hook';
+import { useResizeObserver } from 'heitu';
 import { Input } from 'antd';
 
 export default () => {

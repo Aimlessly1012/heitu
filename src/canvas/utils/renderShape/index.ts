@@ -1,1 +1,1 @@
-export { renderRect } from './renderRect';
+// export { renderRect } from './renderRect';

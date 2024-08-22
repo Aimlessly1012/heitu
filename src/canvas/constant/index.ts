@@ -1,10 +1,10 @@
-import { IShape } from '../type';
+// import { IShape } from '../type';
 export type EventType = 'mouseleave' | 'mouseenter' | 'mousemove' | 'mousedown' | 'mouseup' | 'click'
 export type OnEventType = `on${EventType}`
 
 export const dpr = window.devicePixelRatio;
 export type EventParameter = {
-  target: IShape;
+  target: any;
   x: number;
   y: number;
   dx?: number;

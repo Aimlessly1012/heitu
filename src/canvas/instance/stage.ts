@@ -1,5 +1,6 @@
 import { EventParameter } from '../constant';
-import { drawStageShapes, initStage } from './api';
+import { drawStageShapes, initStage, mountStage } from './api/api';
+import { resetSchedulerCount } from './api/scheduler';
 
 interface IOption {
   container: HTMLElement;
@@ -7,6 +8,10 @@ interface IOption {
 export class Stage {
   canvasElement: HTMLCanvasElement | null;
   ctx: CanvasRenderingContext2D | null;
+  // todo Ts
+  children: any[] = [];
+  private isAsyncRenderTask = false;
+
   constructor() {
     this.canvasElement = null;
     this.ctx = null;
@@ -16,16 +21,37 @@ export class Stage {
     const { container } = option;
 
     const stage = initStage(container);
+    // 画布的 context 用于绘制等
     this.ctx = stage?.ctx as CanvasRenderingContext2D;
-    this.canvasElement = stage.canvasElement;
+    // 画布元素 用于操作 dom
+    this.canvasElement = stage?.canvasElement;
     // 绘制 canvas 内部数据
     this.renderStage();
     // 添加事件监听
     // this.addStageEventListener();
   }
+  // 添加子元素
+  appendChild(...args: any[]) {
+    const elements = args.flat(1);
+    this.children = this.children.concat(elements);
+    this.children = this.children.map((item) =>
+      Object.assign(item, { parent: this }),
+    );
+    mountStage(this.children, this);
+  }
   renderStage() {
+    if (this.isAsyncRenderTask) {
+      return;
+    }
+
+    this.isAsyncRenderTask = true;
+
     requestAnimationFrame(() => {
+      resetSchedulerCount();
+
       drawStageShapes(this);
+
+      this.isAsyncRenderTask = false;
     });
   }
   // canvas 添加时间监听
@@ -44,15 +70,5 @@ export class Stage {
         console.log(eventParameter, 'onmousemove_eventParameter');
       }
     };
-    // // 拖拽
-    // this.canvasElement.addEventListener('mousedown', (evt) => {
-    //   const eventParameter: EventParameter = {
-    //     target: 'Circle',
-    //     x: evt.offsetX,
-    //     y: evt.offsetY,
-    //     nativeEvent: evt,
-    //   };
-    //   console.log(eventParameter, 'mousedown eventParameter');
-    // });
   }
 }

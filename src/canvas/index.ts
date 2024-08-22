@@ -1,2 +1,3 @@
+import Rect from './element/Rect';
 import Stage from './element/Stage';
-export { Stage };
+export { Rect, Stage };

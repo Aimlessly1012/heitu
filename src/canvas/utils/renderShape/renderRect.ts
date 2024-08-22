@@ -1,29 +1,5 @@
-import { Rect, Trapezoid } from '../../shape';
-
-export function setTrapezoidPath2D(elementItem: Trapezoid) {
-  const { x, y, width, height, shortLength } = elementItem.data;
-
-  const path2D = new Path2D();
-
-  let _shortLength: number;
-
-  if (typeof shortLength === 'number') {
-    _shortLength = shortLength;
-  } else if (typeof shortLength === 'string') {
-    _shortLength = (parseFloat(shortLength) / 100) * width;
-  }
-
-  path2D.moveTo(x + (width / 2 - _shortLength / 2), y);
-  path2D.lineTo(x + (width / 2 - _shortLength / 2) + _shortLength, y);
-  path2D.lineTo(x + width, y + height);
-  path2D.lineTo(x, y + height);
-
-  path2D.closePath();
-
-  elementItem.path2D = path2D;
-}
-
-export function createRectPath2D(data) {
+// 使用 Path2D 创建 rect 路径
+export const createRectPath2D = (data: any) => {
   const { x, y, width, height, cornerRadius = 0 } = data;
 
   const path2D = new Path2D();
@@ -61,10 +37,10 @@ export function createRectPath2D(data) {
     (Math.PI / 2) * 3,
   );
   path2D.closePath();
-
+  console.log(path2D, 'path2D');
   return path2D;
-}
-
-export function setRectPath2D(elementItem: Rect) {
+};
+// 设置 rect 路径 到 elementItem
+export const setRectPath2D = (elementItem: any) => {
   elementItem.path2D = createRectPath2D(elementItem.data);
-}
+};

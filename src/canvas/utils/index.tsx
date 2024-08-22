@@ -1,27 +1,8 @@
-import { useLayoutEffect } from "react";
+export const sortChildren = (children: any) => {
+  return children.toSorted((a: any, b: any) => {
+    const a_zIndex = a.data.zIndex;
+    const b_zIndex = b.data.zIndex;
 
-export const usePropertyChange = (props, property, shape) => {
-  useLayoutEffect(() => {
-    if (props.animation?.duration > 16.7) {
-      shape
-        .animateCartoon({ [property]: props[property] }, { ...props.animation })
-        .then(() => {
-          props.animation.animationEnd?.();
-        });
-    } else {
-      if (props[property] !== undefined) {
-        shape.attr({ [property]: props[property] });
-      }
-    }
-  }, [props[property]]);
-};
-
-export const useBindEvent = (props, shapeInstance) => {
-  useLayoutEffect(() => {
-    for (const key in props) {
-      if (key.startsWith('on')) {
-        shapeInstance[key] = props[key];
-      }
-    }
+    return a_zIndex - b_zIndex;
   });
 };

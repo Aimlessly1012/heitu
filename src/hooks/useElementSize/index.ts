@@ -1,4 +1,4 @@
-import useResizeObserver from 'heitu-hook/useResizeObserver';
+import useResizeObserver from 'heitu-hook/hooks/useResizeObserver';
 import { defaultOptions } from 'heitu-hook/utils/defaults';
 import { useState } from 'react';
 

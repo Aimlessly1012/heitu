@@ -1,0 +1,1 @@
+export { renderRect } from './renderRect';

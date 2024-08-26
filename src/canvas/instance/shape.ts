@@ -73,4 +73,13 @@ export abstract class Shape<T = object> {
       this.stage?.renderStage();
     }
   }
+  remove() {
+    // const parentChildren = this.parent.children as IShape[];
+    // const index = parentChildren.indexOf(this);
+    // if (index !== -1) {
+    //   parentChildren.splice(index, 1);
+    // }
+
+    // this.stage.renderStage();
+  }
 }

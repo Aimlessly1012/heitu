@@ -2,6 +2,13 @@ import { EventParameter } from '../constant';
 import { drawStageShapes, initStage, mountStage } from './api/api';
 import { resetSchedulerCount } from './api/scheduler';
 
+export interface BoundingRect {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
 interface IOption {
   container: HTMLElement;
 }

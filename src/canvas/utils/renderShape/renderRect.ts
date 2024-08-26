@@ -1,3 +1,5 @@
+// 用于绘制 长方形
+
 // 使用 Path2D 创建 rect 路径
 export const createRectPath2D = (data: any) => {
   const { x, y, width, height, cornerRadius = 0 } = data;

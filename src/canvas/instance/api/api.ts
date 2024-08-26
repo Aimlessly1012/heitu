@@ -1,39 +1,9 @@
-import { sortChildren } from 'heitu/canvas/utils';
+import { drawShapes } from 'heitu/canvas/utils/renderShape';
 import { dpr } from '../../constant';
 // import { IShape } from '../../type';
-import {
-  fillOrStroke,
-  setCtxStyleProp,
-} from 'heitu/canvas/utils/renderShape/common';
-import { setRectPath2D } from 'heitu/canvas/utils/renderShape/renderRect';
 import { Stage } from '../stage';
 
-export function drawShapes(ctx: CanvasRenderingContext2D, list: any[]) {
-  const curlist = sortChildren(list);
-
-  curlist.forEach((elementItem: any) => {
-    console.log(elementItem, 'elementItem');
-    // const { data } = elementItem;
-
-    ctx.beginPath();
-
-    setCtxStyleProp(ctx, elementItem);
-
-    switch (elementItem.type) {
-      case 'Rect': {
-        setRectPath2D(elementItem);
-        console.log(elementItem, 'elementItemelementItem');
-        fillOrStroke(ctx, elementItem);
-
-        break;
-      }
-      default:
-        console.log(elementItem.type, '该图形 暂未实现');
-        break;
-    }
-  });
-}
-
+// 添加子元素 绘制 画布
 export function mountStage(children: any[], stage: Stage) {
   children.forEach((item) => {
     item.stage = stage;
@@ -44,15 +14,17 @@ export function mountStage(children: any[], stage: Stage) {
   });
 }
 
+// 绘制前置工作
 export function drawStageShapes(stage: Stage) {
   const { ctx } = stage;
-
+  // 先清空画布
   (ctx as CanvasRenderingContext2D).clearRect(
     0,
     0,
     stage.canvasElement?.width as number,
     stage.canvasElement?.height as number,
   );
+  // 开始绘制
   drawShapes(ctx as CanvasRenderingContext2D, stage.children);
 }
 // 更新canvas的style

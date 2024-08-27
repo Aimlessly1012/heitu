@@ -106,8 +106,15 @@ const calcD = (
 };
 
 export function setCirclePath2D(elementItem: Circle) {
-  const { x, y, radius, innerRadius, startAngle, endAngle, offsetAngle } =
-    elementItem.data;
+  const {
+    x = 0,
+    y = 0,
+    radius = 0,
+    innerRadius,
+    startAngle = 0,
+    endAngle = 0,
+    offsetAngle = 0,
+  } = elementItem.data;
   const isWholeArc = startAngle === 0 && endAngle === 360; // 是否是整圆
 
   const d = innerRadius

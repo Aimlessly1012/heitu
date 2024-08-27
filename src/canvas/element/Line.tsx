@@ -4,6 +4,7 @@ import { Context } from '../store';
 // import { usePropertyChange } from '../utils/hooks/usePropertyChange';
 
 const defaultProps: LineProps = {
+  // @ts-ignore
   points: [10, 10, 100, 100],
   strokeStyle: 'black',
   start: { x: 0, y: 0 },

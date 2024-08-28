@@ -16,5 +16,5 @@ export const usePropertyChange = (props: any, property: any, shape: any) => {
     if (props[property] !== undefined) {
       shape.attr({ [property]: props[property] });
     }
-  }, [props[property]]);
+  }, [JSON.stringify(props[property])]);
 };

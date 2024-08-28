@@ -65,7 +65,11 @@ export abstract class Shape<T = object> {
           this.data = { ...this.data, ...data };
           break;
         }
-
+        // case 2: {
+        //   const [key, value] = args;
+        //   this.data[key] = value;
+        //   break;
+        // }
         default:
           console.log('未实现的参数数量');
           break;
@@ -79,7 +83,6 @@ export abstract class Shape<T = object> {
     // if (index !== -1) {
     //   parentChildren.splice(index, 1);
     // }
-
     // this.stage.renderStage();
   }
 }

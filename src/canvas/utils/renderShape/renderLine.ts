@@ -1,5 +1,6 @@
 import { Line } from 'heitu/canvas/instance/line';
 import { ICoord } from 'heitu/canvas/type';
+import { calcSmoothPath2D } from './renderCurve';
 
 // import { Line } from 'heitu/canvas/instance/line';
 export function pointToFlatArray(list: ICoord[]) {
@@ -102,17 +103,13 @@ export function calcStraightPath2D(points: number[], percent: number) {
 
 // 创建直线的 path2D
 export function createLinePath2D(data: Line['data']) {
-  const {
-    points,
-    closed,
-    percent,
-    // smooth
-  } = data;
+  const { points = [], closed, percent = 1, smooth } = data;
+
   // 根据 smooth 绘制平滑的线还是 直线
-  // const path2D = smooth
-  //   ? calcSmoothPath2D(points, percent)
-  //   : calcStraightPath2D(points, percent);
-  const path2D = calcStraightPath2D(points as number[], percent as number);
+  const path2D = smooth
+    ? calcSmoothPath2D(points, percent)
+    : calcStraightPath2D(points, percent);
+
   if (closed) {
     path2D.closePath();
   }

@@ -1,3 +1,4 @@
+// import { createLinePath2D } from '../utils/renderShape/renderLine';
 import { createLinePath2D } from '../utils/renderShape/renderLine';
 import { Shape, ShapeData } from './shape';
 
@@ -19,8 +20,7 @@ const defaultData: LineData = {
 export class Line extends Shape<LineData> {
   constructor(data: LineData) {
     super('Line', data, defaultData);
-    console.log(data, defaultData, '0-0-0-');
-    // this.path2D = data.path2D ? data.path2D : createLinePath2D(this.data);
+    this.path2D = data.path2D ? data.path2D : createLinePath2D(this.data);
   }
   declare data: LineData;
 }

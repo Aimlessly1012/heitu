@@ -1,13 +1,18 @@
 import { Circle } from 'heitu/canvas/instance/circle';
+import { Text } from 'heitu/canvas/instance/text';
+import { Trapezoid } from 'heitu/canvas/instance/trapezoid';
 import { sortChildren } from 'heitu/canvas/utils';
 import {
   fillOrStroke,
+  hasStroke,
+  setCtxFontSize,
   setCtxStyleProp,
 } from 'heitu/canvas/utils/renderShape/common';
 import { setRectPath2D } from 'heitu/canvas/utils/renderShape/renderRect';
 import { setCirclePath2D } from './renderCircle';
-import { Trapezoid } from 'heitu/canvas/instance/trapezoid';
+import { createLinePath2D } from './renderLine';
 import { setTrapezoidPath2D } from './renderTrapezoid';
+import { Line } from 'heitu/canvas/instance/line';
 
 // 根据不同的 类型绘制
 export function drawShapes(ctx: CanvasRenderingContext2D, list: any[]) {
@@ -15,7 +20,7 @@ export function drawShapes(ctx: CanvasRenderingContext2D, list: any[]) {
 
   curlist.forEach((elementItem: any) => {
     console.log(elementItem, 'elementItem');
-    // const { data } = elementItem;
+    const { data } = elementItem;
 
     ctx.beginPath();
 
@@ -35,13 +40,38 @@ export function drawShapes(ctx: CanvasRenderingContext2D, list: any[]) {
       }
       case 'Line': {
         console.log(elementItem, 'elementItem');
-        // const { closed, path2D } = data as Line['data'];
+        const { closed, path2D } = elementItem as Line['data'];
+        // 调用 attr() 方法后,  需重新计算 path2D, 且一定会有 bug, 需要优化
+        elementItem.path2D = path2D ? path2D : createLinePath2D(data);
+        if (hasStroke(data.lineWidth, data.strokeStyle)) {
+          ctx.stroke(elementItem.path2D);
+        }
 
+        if (closed) {
+          ctx.fill(elementItem.path2D);
+        }
         break;
       }
       case 'Circle': {
         setCirclePath2D(elementItem as Circle);
         fillOrStroke(ctx, elementItem);
+        break;
+      }
+      case 'Text': {
+        const {
+          x,
+          y,
+          content,
+          fontSize,
+          textAlign = 'left',
+          textBaseline,
+        } = data as Text['data'];
+
+        setCtxFontSize(ctx, fontSize);
+
+        ctx.textBaseline = textBaseline as CanvasTextBaseline;
+        ctx.textAlign = textAlign;
+        ctx.fillText(content as string, x || 0, y || 0);
         break;
       }
       default:

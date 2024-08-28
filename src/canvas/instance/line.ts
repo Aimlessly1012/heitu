@@ -1,22 +1,26 @@
+import { createLinePath2D } from '../utils/renderShape/renderLine';
 import { Shape, ShapeData } from './shape';
 
 export interface LineData extends ShapeData {
-  x?: number;
-  y?: number;
-  width?: number;
-  height?: number;
-  cornerRadius?: number;
+  path2D?: Path2D;
+  points?: number[];
+  closed?: boolean;
+  smooth?: boolean;
+  percent?: number; // 0 - 1
 }
 
-export const defaultLineData = {
-  cornerRadius: 0,
+const defaultData: LineData = {
   lineWidth: 1,
+  lineCap: 'butt',
+  lineJoin: 'miter',
+  percent: 1,
 };
 // @
 export class Line extends Shape<LineData> {
   constructor(data: LineData) {
-    super('Line', data, defaultLineData);
-    // this.path2D = data.path2D ? data.path2D : createLinePath2D(this.data)
+    super('Line', data, defaultData);
+    console.log(data, defaultData, '0-0-0-');
+    // this.path2D = data.path2D ? data.path2D : createLinePath2D(this.data);
   }
-  declare data: LineData
+  declare data: LineData;
 }

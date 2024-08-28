@@ -62,3 +62,7 @@ export function setCtxStyleProp(
     ctx.translate(translate.x, translate.y);
   }
 }
+
+export function setCtxFontSize(ctx: CanvasRenderingContext2D, fontSize = 14) {
+  ctx.font = `${fontSize}px 微软雅黑`;
+}

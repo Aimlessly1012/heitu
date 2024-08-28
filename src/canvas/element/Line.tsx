@@ -1,6 +1,7 @@
 import { useContext, useLayoutEffect, useRef } from 'react';
 import { Line as _Line } from '../instance/line';
 import { Context } from '../store';
+import { usePropertyChange } from '../utils/hooks/usePropertyChange';
 // import { usePropertyChange } from '../utils/hooks/usePropertyChange';
 
 const defaultProps: LineProps = {
@@ -19,15 +20,23 @@ export type LineProps = _Line['data'] & {
 const Line = (props: LineProps) => {
   const mergeProps = { ...defaultProps, ...props };
   const parent = useContext(Context);
+  if (props.start) {
+    mergeProps.points = [
+      props?.start?.x || 0,
+      props?.start?.y || 0,
+      props?.end?.x || 0,
+      props?.end?.y || 0,
+    ];
+  }
   const line = new _Line(mergeProps);
   const lineRef = useRef(line);
 
+  usePropertyChange(mergeProps, 'points', lineRef.current);
+  usePropertyChange(mergeProps, 'start', lineRef.current);
+  usePropertyChange(mergeProps, 'end', lineRef.current);
+  usePropertyChange(mergeProps, 'lineWidth', lineRef.current);
+  usePropertyChange(mergeProps, 'strokeStyle', lineRef.current);
 
-  // usePropertyChange(mergeProps, 'width', rectRef.current);
-  // usePropertyChange(mergeProps, 'height', rectRef.current);
-  // usePropertyChange(mergeProps, 'x', rectRef.current);
-  // usePropertyChange(mergeProps, 'y', rectRef.current);
-  // usePropertyChange(mergeProps, 'fillStyle', rectRef.current);
 
   useLayoutEffect(() => {
     parent.appendChild(lineRef.current);

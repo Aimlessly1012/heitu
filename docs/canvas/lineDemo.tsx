@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 const Index = () => {
   const [lineWidth, setLineWidth] = useState(2);
 
-  const [strokeStyle, setStrokeStyle] = useState('blue');
+  const [strokeStyle, setStrokeStyle] = useState('black');
   return (
     <div>
       <div>
@@ -28,7 +28,7 @@ const Index = () => {
       <Stage>
         <Line
           start={{ x: 100, y: 100 }}
-          end={{ x: 300, y: 300 }}
+          end={{ x: 200, y: 200 }}
           lineWidth={lineWidth}
           strokeStyle={strokeStyle}
         />

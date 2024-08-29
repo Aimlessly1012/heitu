@@ -1,36 +1,19 @@
 import { Line, Stage } from 'heitu';
-import React, { useState } from 'react';
+import React from 'react';
 
 const Index = () => {
-  const [lineWidth, setLineWidth] = useState(2);
-
-  const [strokeStyle, setStrokeStyle] = useState('black');
   return (
     <div>
-      <div>
-        <label> strokeColor: </label>
-        <input
-          type="color"
-          onChange={(evt) => setStrokeStyle(evt.target.value)}
-        />
-      </div>
-
-      <div>
-        <label> strokeWidth: </label>
-        <input
-          type="range"
-          value={lineWidth}
-          min={1}
-          max={10}
-          onChange={(evt) => setLineWidth(Number(evt.target.value))}
-        />
-      </div>
       <Stage>
         <Line
-          start={{ x: 100, y: 100 }}
-          end={{ x: 200, y: 200 }}
-          lineWidth={lineWidth}
-          strokeStyle={strokeStyle}
+          // x={x}
+          // y={y}
+          // width={width}
+          // height={height}
+          // fillStyle={fillStyle}
+          // strokeStyle={strokeStyle}
+          // lineWidth={lineWidth}
+          // border={0}
         />
       </Stage>
     </div>

@@ -2,16 +2,17 @@ import { Circle, Stage } from 'heitu';
 import React, { useState } from 'react';
 
 const Index = () => {
-  const [x, setX] = useState(100);
+  const [x, setX] = useState(400);
   const [y, setY] = useState(100);
   const [radius, setRadius] = useState(50);
+  const [innerRadius, setInnerRadius] = useState(0);
 
   const [lineWidth, setLineWidth] = useState(1);
 
   const [fillStyle, setFillStyle] = useState('red');
   const [strokeStyle, setStrokeStyle] = useState('blue');
   return (
-    <div>
+    <>
       <div>
         <label> fillColor: </label>
         <input
@@ -60,6 +61,16 @@ const Index = () => {
           onChange={(evt) => setRadius(Number(evt.target.value))}
         />
       </div>
+      <div>
+        <label> innerRadius: </label>
+        <input
+          type="range"
+          value={innerRadius}
+          min={0}
+          max={100}
+          onChange={(evt) => setInnerRadius(Number(evt.target.value))}
+        />
+      </div>
 
       <div>
         <label> strokeWidth: </label>
@@ -80,9 +91,54 @@ const Index = () => {
           fillStyle={fillStyle}
           strokeStyle={strokeStyle}
           lineWidth={lineWidth}
+          border={0}
+        />
+        <Circle
+          x={100}
+          y={100}
+          radius={100}
+          fillStyle={fillStyle}
+          strokeStyle={strokeStyle}
+          lineWidth={lineWidth}
+          border={1}
+          innerRadius={innerRadius}
+        />
+        <Circle
+          x={300}
+          y={300}
+          radius={100}
+          fillStyle={fillStyle}
+          strokeStyle={strokeStyle}
+          lineWidth={lineWidth}
+          border={2}
+        />
+        <Circle
+          x={200}
+          y={100}
+          radius={100}
+          fillStyle={fillStyle}
+          strokeStyle={strokeStyle}
+          lineWidth={lineWidth}
+          startAngle={0}
+          endAngle={60}
+          border={2}
+          innerRadius={innerRadius}
+        />
+
+        <Circle
+          x={400}
+          y={300}
+          radius={50}
+          fillStyle={'black'}
+          strokeStyle={strokeStyle}
+          lineWidth={lineWidth}
+          border={1}
+          startAngle={0}
+          endAngle={60}
+          innerRadius={innerRadius}
         />
       </Stage>
-    </div>
+    </>
   );
 };
 

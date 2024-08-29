@@ -4,20 +4,15 @@ group:
   order: 1
 
 toc: content
-order: 3
+order: 4
 ---
+
 
 # Text
 
 ## 描述
 
 ## 演示
-
   <code src="./textDemo"></code>
-
-
-
-export default Index;
-```
 
 ## API

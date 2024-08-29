@@ -2,7 +2,7 @@ import { useLayoutEffect, useRef } from 'react';
 import { v4 } from 'uuid';
 import { Store } from '../store';
 
-export interface IRect {
+export interface ILine {
   // id?: string;
   x?: number;
   y?: number;
@@ -15,7 +15,7 @@ export interface IRect {
   border: 0 | 1 | 2;
   shortLength?: number;
 }
-const defaultRectdata = {
+const defaultLinedata = {
   x: 0,
   y: 0,
   width: 100,
@@ -27,7 +27,7 @@ const defaultRectdata = {
   border: 0,
 };
 
-const Rect = (props: IRect) => {
+const Line = (props: ILine) => {
   const {
     common: { appendChild },
   } = Store.useContainer();
@@ -35,9 +35,9 @@ const Rect = (props: IRect) => {
 
   useLayoutEffect(() => {
     appendChild(
-      'Rect',
+      'Line',
       {
-        ...defaultRectdata,
+        ...defaultLinedata,
         ...props,
         shortLength: props.shortLength ? props.shortLength : props.width,
       },
@@ -48,4 +48,4 @@ const Rect = (props: IRect) => {
   return null;
 };
 
-export default Rect;
+export default Line;

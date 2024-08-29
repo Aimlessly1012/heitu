@@ -1,44 +1,31 @@
-import { useContext, useLayoutEffect, useRef } from 'react';
-import { Rect as _Rect } from '../instance/rect';
-import { Context } from '../store';
-import { usePropertyChange } from '../utils/hooks/usePropertyChange';
+import { v4 } from 'uuid';
+import { Store } from '../store';
 
-export interface RectProps {
-  width?: number;
-  height?: number;
+export interface IRect {
+  // id?: string;
   x?: number;
   y?: number;
-  fillStyle?: string;
+  width?: number;
+  height?: number;
   cornerRadius?: number;
 }
-const defaultProps: RectProps = {
+const defaultRectdata = {
   x: 0,
   y: 0,
   width: 100,
   height: 100,
   fillStyle: 'black',
+  cornerRadius: 0,
+  lineWidth: 1,
 };
 
-const Rect = (props: RectProps) => {
-  const mergeProps = { ...defaultProps, ...props };
-  const parent = useContext(Context);
-  const rect = new _Rect(mergeProps);
-  const rectRef = useRef(rect);
-  console.log(mergeProps.fillStyle);
+const Rect = (props: IRect) => {
+  const {
+    common: { appendChild },
+  } = Store.useContainer();
+  const currentRectId = v4();
+  appendChild('Rect', { ...defaultRectdata, ...props }, currentRectId);
 
-  usePropertyChange(mergeProps, 'width', rectRef.current);
-  usePropertyChange(mergeProps, 'height', rectRef.current);
-  usePropertyChange(mergeProps, 'x', rectRef.current);
-  usePropertyChange(mergeProps, 'y', rectRef.current);
-  usePropertyChange(mergeProps, 'fillStyle', rectRef.current);
-
-  useLayoutEffect(() => {
-    parent.appendChild(rectRef.current);
-
-    return () => {
-      // rectRef.current.remove();
-    };
-  }, []);
   return null;
 };
 

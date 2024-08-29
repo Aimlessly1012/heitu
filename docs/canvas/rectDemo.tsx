@@ -2,10 +2,10 @@ import { Rect, Stage } from 'heitu';
 import React, { useState } from 'react';
 
 const Index = () => {
-  const [x, setX] = useState(100);
-  const [y, setY] = useState(100);
-  const [width, setWidth] = useState(100);
-  const [height, setHeight] = useState(100);
+  const [x, setX] = useState(20);
+  const [y, setY] = useState(20);
+  const [width, setWidth] = useState(300);
+  const [height, setHeight] = useState(300);
 
   const [fillStyle, setFillStyle] = useState('red');
   return (
@@ -61,6 +61,7 @@ const Index = () => {
           onChange={(evt) => setHeight(Number(evt.target.value))}
         />
       </div>
+
       <Stage>
         <Rect x={x} y={y} width={width} height={height} fillStyle={fillStyle} />
       </Stage>

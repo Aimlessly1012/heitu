@@ -1,8 +1,10 @@
 // import { BoxHidden, Circle, Group, Line, Rect, Text } from './shape'
 
+import { ICircle } from './element/circle';
 import { IRect } from './element/rect';
+import { IText } from './element/text';
 
-export type IShape = IRect;
+export type IShape = IRect | ICircle | IText;
 // |Group | BoxHidden | Circle | Line | Text;
 export type IShapeType =
   | 'Line'

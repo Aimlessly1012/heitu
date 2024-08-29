@@ -4,15 +4,15 @@ group:
   order: 1
 
 toc: content
-order: 2
+order: 4
 ---
 
 
-# Rect / Trapezoid
+# Text
 
 ## 描述
 
 ## 演示
-  <code src="./rectDemo"></code>
+  <code src="./textDemo"></code>
 
 ## API

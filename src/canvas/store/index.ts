@@ -1,38 +1,58 @@
-import { useState } from 'react';
+import { useRef } from 'react';
 import { createContainer } from 'unstated-next';
 import { IShape, IShapeType } from '../type';
-import { drawRect } from '../utils/rect';
-import useStage from './useStage';
+import { drawShape } from '../utils/drawShape';
+import { createCanvas } from '../utils/stage';
 interface Child {
   id: string;
   data: IShape;
   type: IShapeType;
 }
+export interface StageState {
+  ctx: CanvasRenderingContext2D | null;
+  children: Child[] | [];
+  element: HTMLCanvasElement | null;
+}
+
 const useStore = () => {
-  const { canvaseCtx, stageElement, initStage, clearStage } = useStage();
-  const [children, setChildren] = useState<Child[] | []>([]);
+  const stageRef = useRef<StageState>({
+    children: [],
+    ctx: null,
+    element: null,
+  });
+  const initStage = (canvasContainer: HTMLDivElement) => {
+    const { offsetWidth, offsetHeight } = canvasContainer;
+    const { canvasElement, ctx } = createCanvas(offsetWidth, offsetHeight);
+    canvasContainer.append(canvasElement);
+    stageRef.current.ctx = ctx;
+    stageRef.current.element = canvasElement;
+  };
 
   const appendChild = (type: IShapeType, data: IShape, id: string) => {
-    if (!canvaseCtx || !stageElement) return;
-    canvaseCtx.clearRect(0, 0, stageElement.width, stageElement.height);
-    switch (type) {
-      case 'Rect':
-        drawRect(canvaseCtx, data);
-        break;
-      default:
-        console.log(type, '该图形 暂未实现');
-        break;
+    if (!stageRef.current.ctx || !stageRef.current.element) return;
+    const { children } = stageRef.current;
+
+    let curChildren = [...children];
+    if (children.some((child: any) => child.id === id)) {
+      curChildren = children.map((child: any) => {
+        if (child.id === id) {
+          return { id, data, type };
+        }
+        return child;
+      });
+    } else {
+      curChildren.push({ id, data, type });
     }
-    setChildren((prev) => [...prev, { id, data, type }]);
+    stageRef.current.children = curChildren;
+    drawShape(stageRef.current);
   };
 
   const refreshDraw = () => {};
+
   return {
     stage: {
-      canvaseCtx,
-      stageElement,
       initStage,
-      clearStage,
+      // clearStage,
       refreshDraw,
     },
     common: { appendChild },

@@ -1,3 +1,6 @@
+import Circle from './element/circle';
+import Line from './element/line';
 import Rect from './element/rect';
 import Stage from './element/stage';
-export { Rect, Stage };
+import Text from './element/text';
+export { Circle, Line, Rect, Stage, Text };

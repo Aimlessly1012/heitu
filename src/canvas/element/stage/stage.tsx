@@ -2,9 +2,6 @@ import React, { useLayoutEffect, useRef } from 'react';
 import { StageProps } from '.';
 import { Store } from '../../store';
 
-// import { Stage as _Stage } from '../instance/stage';
-// import { Store } from '../store';
-
 const defaultProps: StageProps = {
   width: '100%',
   height: 400,
@@ -14,15 +11,17 @@ const defaultProps: StageProps = {
 
 const Stage = (props: StageProps) => {
   const store = Store.useContainer();
-  const canvasRef = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const mergeProps = { ...defaultProps, ...props };
   const {
-    stage: { canvaseCtx, stageElement, initStage },
+    stage: {
+      initStage,
+    },
   } = store;
   useLayoutEffect(() => {
-    if (canvasRef.current) initStage(canvasRef.current);
+    if (ref.current) initStage(ref.current);
   }, []);
-  return <div ref={canvasRef} style={mergeProps} />;
+  return <div ref={ref} style={mergeProps} />;
 };
 
 export default Stage;

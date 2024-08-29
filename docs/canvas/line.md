@@ -8,11 +8,11 @@ order: 2
 ---
 
 
-# Rect / Trapezoid
+# line
 
 ## 描述
 
 ## 演示
-  <code src="./rectDemo"></code>
+  <code src="./lineDemo"></code>
 
 ## API

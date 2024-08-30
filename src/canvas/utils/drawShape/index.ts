@@ -6,6 +6,8 @@ import { IText } from 'heitu/canvas/element/text';
 import { drawCircle } from './circle';
 import { drawRectCommon } from './rect';
 import { drawText } from './text';
+import { drawLine } from './line';
+import { ILine } from 'heitu/canvas/element/line';
 
 export const drawShape = (stageState: StageState) => {
   const { ctx, element, children } = stageState;
@@ -22,6 +24,9 @@ export const drawShape = (stageState: StageState) => {
         break;
       case 'Text':
         drawText(ctx, data as IText);
+        break;
+      case 'Line':
+        drawLine(ctx, data as ILine);
         break;
       default:
         console.log(type, '该图形 暂未实现');

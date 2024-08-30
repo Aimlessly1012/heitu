@@ -3,28 +3,26 @@ import { v4 } from 'uuid';
 import { Store } from '../store';
 
 export interface ILine {
-  // id?: string;
-  x?: number;
-  y?: number;
-  width?: number;
-  height?: number;
-  cornerRadius?: number;
-  fillStyle?: string;
-  lineWidth?: number;
-  strokeStyle?: string;
-  border: 0 | 1 | 2;
-  shortLength?: number;
+  start?: { x: number; y: number };
+  end?: { x: number; y: number };
+  points?: number[];
+  smooth?: boolean;
+  strokeStyle: string;
+  lineWidth: number;
+  lineCap: 'butt' | 'round' | 'square';
+  lineJoin: 'miter' | 'round' | 'miter';
+  // percent?: number; // 0 - 1
+  // closed?: boolean;
 }
 const defaultLinedata = {
-  x: 0,
-  y: 0,
-  width: 100,
-  height: 100,
-  fillStyle: 'black',
+  start: { x: 10, y: 10 },
+  end: { x: 100, y: 100 },
+  points: [],
   strokeStyle: 'black',
-  cornerRadius: 0,
   lineWidth: 1,
-  border: 0,
+  lineCap: 'butt',
+  lineJoin: 'miter',
+  // percent: 1,
 };
 
 const Line = (props: ILine) => {
@@ -39,7 +37,6 @@ const Line = (props: ILine) => {
       {
         ...defaultLinedata,
         ...props,
-        shortLength: props.shortLength ? props.shortLength : props.width,
       },
       ref.current,
     );

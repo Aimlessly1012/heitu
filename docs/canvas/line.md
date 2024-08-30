@@ -9,11 +9,11 @@ order: 5
 
 
 # line
-## 正在建设中
 
 
-<!-- ## 描述
+
+## 描述
 ## 演示
   <code src="./lineDemo"></code>
 
-## API -->
+## API

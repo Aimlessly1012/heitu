@@ -1,6 +1,6 @@
 {
   "name": "heitu",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "diy hook canvas component",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -80,7 +80,6 @@
     "@types/qs": "^6.9.15",
     "@types/urijs": "^1.19.25",
     "@types/uuid": "^10.0.0",
-    "antd": "^5.20.1",
     "axios": "^1.7.2",
     "fflate": "^0.8.2",
     "js-cookie": "^3.0.5",

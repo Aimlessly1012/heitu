@@ -6,12 +6,16 @@ group:
 toc: content
 order: 1
 ---
+
 # useGetComponentRenderTime
 
 ## 描述
 
+获取组件渲染时间，支持批量获取多个组件 和单个组件
 
-## 演示
+## 正在建设中
+
+<!-- ## 演示
 
 
 
@@ -23,4 +27,4 @@ order: 1
 ## return
 
 | name | description | type | default |
-| ---- | ----------- | ---- | ------- |
+| ---- | ----------- | ---- | ------- | -->

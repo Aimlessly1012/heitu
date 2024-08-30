@@ -6,3 +6,4 @@ export { default as useInfiniteScroll } from './useInfiniteScroll';
 export { default as useInView } from './useInView';
 export { default as useResizeObserver } from './useResizeObserver';
 export { default as usePrevious } from './usePrevious';
+export { default as useWindowSize } from './useWindowSize';

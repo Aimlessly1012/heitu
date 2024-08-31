@@ -81,6 +81,7 @@ export const drawCircle = (ctx: CanvasRenderingContext2D, props: ICircle) => {
     if (fillStyle) ctx.fillStyle = fillStyle; // 填充颜色
     if (lineWidth) ctx.lineWidth = lineWidth; // 描边宽度
     ctx.fill(circlePath);
+    return circlePath;
   } else if (border === 1) {
     const d = calcRingD(
       radius,
@@ -94,6 +95,7 @@ export const drawCircle = (ctx: CanvasRenderingContext2D, props: ICircle) => {
     const circlePath = new Path2D(d);
     ctx.lineWidth = lineWidth;
     ctx.stroke(circlePath);
+    return circlePath;
   } else if (border === 2) {
     const d = calcRingD(
       radius,
@@ -111,5 +113,7 @@ export const drawCircle = (ctx: CanvasRenderingContext2D, props: ICircle) => {
     if (lineWidth) ctx.lineWidth = lineWidth; // 描边宽度
     ctx.stroke(circlePath);
     ctx.fill(circlePath);
+    return circlePath;
   }
+  return new Path2D();
 };

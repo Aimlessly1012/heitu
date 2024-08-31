@@ -2,12 +2,12 @@ import { ICircle } from 'heitu/canvas/element/circle';
 import { IRect } from 'heitu/canvas/element/rect';
 import { StageState } from 'heitu/canvas/store';
 
+import { ILine } from 'heitu/canvas/element/line';
 import { IText } from 'heitu/canvas/element/text';
 import { drawCircle } from './circle';
+import { drawLine } from './line';
 import { drawRectCommon } from './rect';
 import { drawText } from './text';
-import { drawLine } from './line';
-import { ILine } from 'heitu/canvas/element/line';
 
 export const drawShape = (stageState: StageState) => {
   const { ctx, element, children } = stageState;
@@ -17,10 +17,10 @@ export const drawShape = (stageState: StageState) => {
     const { data, type } = item;
     switch (type) {
       case 'Rect':
-        drawRectCommon(ctx, data as IRect);
+        item.path2D = drawRectCommon(ctx, data as IRect);
         break;
       case 'Circle':
-        drawCircle(ctx, data as ICircle);
+        item.path2D = drawCircle(ctx, data as ICircle);
         break;
       case 'Text':
         drawText(ctx, data as IText);

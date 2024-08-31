@@ -37,3 +37,11 @@ export type ICursor =
   | 'help';
 
 export type ICoord = { x: number; y: number };
+export type EventParameter = {
+  target: IShape;
+  x: number;
+  y: number;
+  dx?: number;
+  dy?: number;
+  nativeEvent?: MouseEvent;
+};

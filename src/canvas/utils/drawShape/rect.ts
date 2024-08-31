@@ -1,9 +1,6 @@
 import { IRect } from 'heitu/canvas/element/rect';
 
-export function drawRectCommon(
-  ctx: CanvasRenderingContext2D,
-  props: IRect,
-) {
+export function drawRectCommon(ctx: CanvasRenderingContext2D, props: IRect) {
   const {
     x = 0,
     y = 0,
@@ -38,6 +35,7 @@ export function drawRectCommon(
   if (lineWidth) ctx.lineWidth = lineWidth;
   ctx.stroke(path2D);
   ctx.fill(path2D);
+  return path2D;
 }
 
 // 使用path2D绘制矩形

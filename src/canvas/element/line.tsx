@@ -1,8 +1,9 @@
 import { useLayoutEffect, useRef } from 'react';
 import { v4 } from 'uuid';
 import { Store } from '../store';
+import { CommonShape } from '../type';
 
-export interface ILine {
+export interface ILine extends CommonShape {
   start?: { x: number; y: number };
   end?: { x: number; y: number };
   points?: number[];

@@ -5,7 +5,13 @@ import { ILine } from './element/line';
 import { IRect } from './element/rect';
 import { IText } from './element/text';
 
+export interface CommonShape {
+  zIndex: number;
+  cursor: CSSProperties['cursor'];
+}
+
 export type IShape = IRect | ICircle | IText | ILine;
+
 // |Group | BoxHidden | Circle | Line | Text;
 export type IShapeType =
   | 'Line'

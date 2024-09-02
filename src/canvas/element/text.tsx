@@ -1,8 +1,9 @@
 import { useLayoutEffect, useRef } from 'react';
 import { v4 } from 'uuid';
 import { Store } from '../store';
+import { CommonShape } from '../type';
 
-export interface IText {
+export interface IText extends CommonShape {
   x?: number;
   y?: number;
   content?: string;

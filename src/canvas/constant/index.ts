@@ -11,11 +11,3 @@
 //   dy?: number;
 //   nativeEvent?: MouseEvent;
 // };
-// export const eventStageList: OnEventType[] = [
-//   'onmouseleave',
-//   'onmouseenter',
-//   'onmousemove',
-//   'onmousedown',
-//   'onmouseup',
-//   'onclick',
-// ];

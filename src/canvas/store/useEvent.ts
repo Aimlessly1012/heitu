@@ -1,6 +1,6 @@
-import { forIn } from 'lodash-es';
-import { useEffect, useRef } from 'react';
-import { StageState } from '.';
+import { useEffect } from 'react';
+import { Handler, StageState } from '.';
+import { dpr } from '../utils/constant';
 
 export type EventType =
   | 'mouseleave'
@@ -10,27 +10,33 @@ export type EventType =
   | 'mouseup'
   | 'click';
 
-export type OnEventType = `on${EventType}`;
+export type OnEventType =
+  | 'onMouseLeave'
+  | 'onMouseEnter'
+  | 'onMouseMove'
+  | 'onMouseDown'
+  | 'onMouseUp'
+  | 'onClick';
 export const eventOnStageList: OnEventType[] = [
-  'onmouseleave',
-  'onmouseenter',
-  'onmousemove',
-  'onmousedown',
-  'onmouseup',
-  'onclick',
-];
-export const eventStageList: EventType[] = [
-  'mouseleave',
-  'mouseenter',
-  'mousemove',
-  'mousedown',
-  'mouseup',
-  'click',
+  'onMouseLeave',
+  'onMouseEnter',
+  'onMouseMove',
+  'onMouseDown',
+  'onMouseUp',
+  'onClick',
 ];
 
-const useEvent = (stage: StageState) => {
-  const eventRef = useRef([]);
-  // // 检查是否点击到某个图形
+export enum eventStageEnum {
+  'onMouseLeave' = 'mouseleave',
+  'onMouseEnter' = 'mouseenter',
+  'onMouseMove' = 'mousemove',
+  'onMouseDown' = 'mousedown',
+  'onMouseUp' = 'mouseup',
+  'onClick' = 'click',
+}
+
+const useEvent = (stage: StageState, eventMap: Map<OnEventType, Handler[]>) => {
+  // 检查是否点击到某个图形
   // const handleInShape = (childrenShape: Child) => {};
 
   useEffect(() => {
@@ -38,41 +44,60 @@ const useEvent = (stage: StageState) => {
 
     const handleAction = (
       evt: HTMLElementEventMap[EventType],
-      eventName: EventType,
+      eventName: OnEventType,
     ) => {
-      const rect = stage.element.getBoundingClientRect();
-      const mouseX = evt.clientX - rect.left;
-      const mouseY = evt.clientY - rect.top;
-      stage.children.forEach((item) => {
-        // console.log(item.path2D, item.type, 'item.path2D');
-        if (stage.ctx.isPointInPath(item.path2D, mouseX, mouseY)) {
-          console.log(item.type, 'itemitem');
-          return 
+      if (eventMap.has(eventName)) {
+        const mouseX = evt.offsetX * dpr;
+        const mouseY = evt.offsetY * dpr;
+        stage.children.forEach((child) => {
+          // @ts-ignore
+          if (stage?.ctx?.isPointInPath(child?.path2D, mouseX, mouseY)) {
+            if (child.data[eventName]) child.data[eventName]();
+          }
+        });
+      }
+    };
+    const handleActionMove = (evt: HTMLElementEventMap[EventType]) => {
+      const mouseX = evt.offsetX * dpr;
+      const mouseY = evt.offsetY * dpr;
+      stage.children.forEach((child) => {
+        const inShape = stage?.ctx?.isPointInPath(
+          // @ts-ignore
+          child?.path2D,
+          mouseX,
+          mouseY,
+        );
+
+        if (child.data['onMouseEnter'] && inShape) {
+          stage?.element?.style.setProperty(
+            'cursor',
+            child.data?.cursor || 'auto',
+          );
+          child.data['onMouseEnter']();
+
+          child.data.isHovered = true;
+        }
+        if (child.data['onMouseLeave'] && !inShape && child.data.isHovered) {
+          stage?.element?.style.setProperty('cursor', 'auto');
+          child.data['onMouseLeave']();
+          child.data.isHovered = true;
         }
       });
     };
 
-    stage?.children?.forEach((child) => {
-      forIn(child.data, (val, key) => {
-        if (
-          !eventRef.current.includes(key.replace(/^on/, '')) &&
-          eventOnStageList.includes(key)
-        ) {
-          eventRef.current.push(key.replace(/^on/, ''));
-        }
+    stage.element?.addEventListener('mousemove', (e) => handleActionMove(e));
+    eventOnStageList
+      .filter((n) => !['onMouseMove', 'onMouseLeave'].includes(n))
+      .forEach((eventName) => {
+        stage.element?.addEventListener(eventStageEnum[eventName], (e) =>
+          handleAction(e, eventName),
+        );
       });
-    });
-    console.log(eventRef.current, 'eventRef.current');
-    eventRef.current.forEach((eventName) => {
-      stage.element?.addEventListener(eventName, (e) =>
-        handleAction(e, eventName),
-      );
-    });
-    //   // 清除事件监听器
+    // 清除事件监听器
     return () => {
       if (stage.element) {
-        eventRef.current.forEach((eventName) => {
-          stage.element?.removeEventListener(eventName, (e) =>
+        eventOnStageList.forEach((eventName) => {
+          stage.element?.removeEventListener(eventStageEnum[eventName], (e) =>
             handleAction(e, eventName),
           );
         });

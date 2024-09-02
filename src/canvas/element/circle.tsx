@@ -1,8 +1,9 @@
 import { useLayoutEffect, useRef } from 'react';
 import { v4 } from 'uuid';
 import { Store } from '../store';
+import { CommonShape } from '../type';
 
-export interface ICircle {
+export interface ICircle extends CommonShape {
   x?: number;
   y?: number;
   radius?: number;

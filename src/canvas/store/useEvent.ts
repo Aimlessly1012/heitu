@@ -49,10 +49,13 @@ const useEvent = (stage: StageState, eventMap: Map<OnEventType, Handler[]>) => {
       if (eventMap.has(eventName)) {
         const mouseX = evt.offsetX * dpr;
         const mouseY = evt.offsetY * dpr;
-        stage.children.forEach((child) => {
+        stage?.children?.forEach((child) => {
           // @ts-ignore
-          if (stage?.ctx?.isPointInPath(child?.path2D, mouseX, mouseY)) {
-            if (child.data[eventName]) child.data[eventName]();
+          if (
+            child?.path2D &&
+            stage?.ctx?.isPointInPath(child?.path2D, mouseX, mouseY)
+          ) {
+            if (child.data?.[eventName]) child.data[eventName]();
           }
         });
       }
@@ -60,27 +63,36 @@ const useEvent = (stage: StageState, eventMap: Map<OnEventType, Handler[]>) => {
     const handleActionMove = (evt: HTMLElementEventMap[EventType]) => {
       const mouseX = evt.offsetX * dpr;
       const mouseY = evt.offsetY * dpr;
-      stage.children.forEach((child) => {
-        const inShape = stage?.ctx?.isPointInPath(
-          // @ts-ignore
-          child?.path2D,
-          mouseX,
-          mouseY,
-        );
+      stage?.children?.forEach((child) => {
+        if (stage?.ctx?.isPointInPath) {
+          const inShape =
+            stage?.ctx?.isPointInPath &&
+            child?.path2D &&
+            stage?.ctx?.isPointInPath(
+              // @ts-ignore
+              child?.path2D,
+              mouseX,
+              mouseY,
+            );
 
-        if (child.data['onMouseEnter'] && inShape) {
-          stage?.element?.style.setProperty(
-            'cursor',
-            child.data?.cursor || 'auto',
-          );
-          child.data['onMouseEnter']();
+          if (child.data?.['onMouseEnter'] && inShape) {
+            stage?.element?.style.setProperty(
+              'cursor',
+              child.data?.cursor || 'auto',
+            );
+            child.data['onMouseEnter']();
 
-          child.data.isHovered = true;
-        }
-        if (child.data['onMouseLeave'] && !inShape && child.data.isHovered) {
-          stage?.element?.style.setProperty('cursor', 'auto');
-          child.data['onMouseLeave']();
-          child.data.isHovered = true;
+            child.data.isHovered = true;
+          }
+          if (
+            child.data?.['onMouseLeave'] &&
+            !inShape &&
+            child.data.isHovered
+          ) {
+            stage?.element?.style.setProperty('cursor', 'auto');
+            child.data['onMouseLeave']();
+            child.data.isHovered = true;
+          }
         }
       });
     };

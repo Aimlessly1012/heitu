@@ -12,8 +12,9 @@ order: 3
 
 ## 描述
 根据画布重新渲染 画布内容
+- 演示推荐 打开左右控制台拖拽 
 
 ## 演示
-  <code src="./demo/eventBubbleDemo"></code>
+  <code src="./demo/stageDemo"></code>
 
 ## API

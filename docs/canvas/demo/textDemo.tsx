@@ -5,11 +5,8 @@ const Index = () => {
   const [x, setX] = useState(100);
   const [y, setY] = useState(100);
   const [content, setContent] = useState('heitu');
-
-  const [lineWidth, setLineWidth] = useState(1);
-
   const [fontSize, setFontSize] = useState(14);
-  const [fillStyle, setFillStyle] = useState('red');
+  const [fillStyle, setFillStyle] = useState('blue');
 
   return (
     <>
@@ -78,14 +75,23 @@ const Index = () => {
           y={10}
           fontSize={fontSize}
           content={content}
-          fillStyle={"black"}
+          fillStyle={'black'}
         />
         <Text
           x={60}
           y={60}
           fontSize={30}
           content={content}
-          fillStyle={'blue'}
+          fillStyle={fillStyle}
+          onClick={() => {
+            setFillStyle(fillStyle === 'blue' ? 'red' : 'blue');
+          }}
+          // onMouseEnter={() => {
+          //   setFillStyle('red');
+          // }}
+          // onMouseLeave={() => {
+          //   setFillStyle('blue');
+          // }}
         />
       </Stage>
     </>

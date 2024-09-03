@@ -11,6 +11,7 @@ order: 1
 # Rect / Trapezoid
 
 ## 描述
+canvas中 矩形 和 梯形 基础演示
 
 ## 演示
   <code src="./demo/rectDemo"></code>

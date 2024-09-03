@@ -8,6 +8,12 @@ import { IText } from './element/text';
 export interface CommonShape {
   zIndex: number;
   cursor: CSSProperties['cursor'];
+  isHovered?: boolean;
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+  draggable;
 }
 
 export type IShape = IRect | ICircle | IText | ILine;

@@ -5,13 +5,15 @@ import { IShape, IShapeType } from '../type';
 import { drawShape } from '../utils/drawShape';
 import { createCanvas, updateCanvas } from '../utils/stage';
 import useEvent, { eventOnStageList, OnEventType } from './useEvent';
+export type ChildData = IShape & { [K in OnEventType]?: () => void };
 interface Child {
   id: string;
-  data: IShape & { [K in OnEventType]?: () => void } & {
-    isHovered?: boolean;
-  };
+  data: ChildData;
   type: IShapeType;
   path2D?: Path2D;
+  dragging?: boolean;
+  offsetY?: number;
+  offsetX?: number;
 }
 export interface StageState {
   ctx: CanvasRenderingContext2D | null;
@@ -139,7 +141,7 @@ const useStore = () => {
     firstRenderRef.current = false;
   };
 
-  useEvent(stageRef.current as StageState, eventMapRef.current);
+  useEvent(stageRef.current as StageState, eventMapRef.current, drawShape);
 
   useEffect(() => {
     return () => destroyCanvas();

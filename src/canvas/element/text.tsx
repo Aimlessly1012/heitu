@@ -11,6 +11,8 @@ export interface IText extends CommonShape {
   fontSize?: number;
   textAlign?: CanvasTextAlign;
   textBaseline?: CanvasTextBaseline;
+  width?: number;
+  height?: number;
 }
 const defaultTextdata = {
   fillStyle: '#333',

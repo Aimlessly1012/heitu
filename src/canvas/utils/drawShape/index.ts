@@ -23,7 +23,13 @@ export const drawShape = (stageState: StageState) => {
         item.path2D = drawCircle(ctx, data as ICircle);
         break;
       case 'Text':
-        drawText(ctx, data as IText);
+        // eslint-disable-next-line no-case-declarations
+        const { width, height } = drawText(ctx, data as IText);
+        // @ts-ignore
+        item.data.width = width as number;
+        // @ts-ignore
+        item.data.height = height;
+
         break;
       case 'Line':
         item.path2D = drawLine(ctx, data as ILine);

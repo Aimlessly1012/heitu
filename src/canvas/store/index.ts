@@ -1,9 +1,9 @@
 import { forIn } from 'lodash-es';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { createContainer } from 'unstated-next';
 import { IShape, IShapeType } from '../type';
 import { drawShape } from '../utils/drawShape';
-import { createCanvas } from '../utils/stage';
+import { createCanvas, updateCanvas } from '../utils/stage';
 import useEvent, { eventOnStageList, OnEventType } from './useEvent';
 interface Child {
   id: string;
@@ -30,6 +30,7 @@ export type EventParameter = {
 export type Handler = () => void;
 
 const useStore = () => {
+  const firstRenderRef = useRef(false);
   const eventMapRef = useRef(new Map<OnEventType, Handler[]>());
 
   const stageRef = useRef<StageState>({
@@ -37,8 +38,7 @@ const useStore = () => {
     ctx: null,
     element: null,
   });
-  //
-  const addStageEventListener = () => {};
+
   // 初始化 画布
   const initStage = (canvasContainer: HTMLDivElement) => {
     const { offsetWidth, offsetHeight } = canvasContainer;
@@ -46,7 +46,6 @@ const useStore = () => {
     canvasContainer.append(canvasElement);
     stageRef.current.ctx = ctx;
     stageRef.current.element = canvasElement;
-    addStageEventListener();
   };
   const off = (data: IShape) => {
     forIn(data, (val, key) => {
@@ -100,13 +99,56 @@ const useStore = () => {
     stageRef.current.children = curChildren;
     drawShape(stageRef.current);
   };
+  // 重新刷新画布
+  const refreshDraw = () => {
+    if (!firstRenderRef?.current) {
+      firstRenderRef.current = true;
+      return;
+    }
+    const ctx = updateCanvas(
+      stageRef.current.element as HTMLCanvasElement,
+      stageRef?.current?.element?.offsetWidth as number,
+      stageRef?.current?.element?.offsetHeight as number,
+    );
+    stageRef.current.ctx = ctx;
 
-  const refreshDraw = () => {};
+    drawShape(stageRef.current);
+  };
+  // 画布尺寸
+  const canvasSize = () => {
+    return {
+      width: stageRef.current.element?.offsetWidth,
+      height: stageRef.current.element?.offsetHeight,
+    };
+  };
+
+  const destroyCanvas = () => {
+    if (stageRef.current.ctx && stageRef.current.element) {
+      stageRef?.current?.ctx.clearRect(
+        0,
+        0,
+        stageRef.current.element.offsetWidth,
+        stageRef.current.element.offsetHeight,
+      );
+      stageRef.current.ctx = null;
+      stageRef.current.element = null;
+    }
+    if (stageRef.current.children?.length) {
+      stageRef.current.children = [];
+    }
+    firstRenderRef.current = false;
+  };
+
   useEvent(stageRef.current as StageState, eventMapRef.current);
+
+  useEffect(() => {
+    return () => destroyCanvas();
+  }, []);
   return {
     stage: {
       initStage,
       refreshDraw,
+      canvasSize,
     },
     common: { appendChild },
   };

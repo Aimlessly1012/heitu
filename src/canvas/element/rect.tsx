@@ -15,8 +15,10 @@ export interface IRect extends CommonShape {
   strokeStyle?: string;
   border: 0 | 1 | 2;
   shortLength?: number;
+  url: string;
+  img?: HTMLImageElement;
 }
-const defaultRectdata = {
+export const defaultRectdata = {
   x: 0,
   y: 0,
   width: 100,

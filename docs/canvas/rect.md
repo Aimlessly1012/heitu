@@ -1,10 +1,10 @@
 ---
 group:
   title: Canvas-Element
-  order: 1
+  order: 2
 
 toc: content
-order: 2
+order: 1
 ---
 
 
@@ -13,6 +13,6 @@ order: 2
 ## 描述
 
 ## 演示
-  <code src="./rectDemo"></code>
+  <code src="./demo/rectDemo"></code>
 
 ## API

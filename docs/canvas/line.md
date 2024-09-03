@@ -1,7 +1,7 @@
 ---
 group:
   title: Canvas-Element
-  order: 1
+  order: 2
 
 toc: content
 order: 5
@@ -14,6 +14,6 @@ order: 5
 
 ## 描述
 ## 演示
-  <code src="./lineDemo"></code>
+  <code src="./demo/lineDemo"></code>
 
 ## API

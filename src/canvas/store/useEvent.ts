@@ -50,7 +50,6 @@ const useEvent = (stage: StageState, eventMap: Map<OnEventType, Handler[]>) => {
         const mouseX = evt.offsetX * dpr;
         const mouseY = evt.offsetY * dpr;
         stage?.children?.forEach((child) => {
-          // @ts-ignore
           if (
             child?.path2D &&
             stage?.ctx?.isPointInPath(child?.path2D, mouseX, mouseY)
@@ -69,7 +68,6 @@ const useEvent = (stage: StageState, eventMap: Map<OnEventType, Handler[]>) => {
             stage?.ctx?.isPointInPath &&
             child?.path2D &&
             stage?.ctx?.isPointInPath(
-              // @ts-ignore
               child?.path2D,
               mouseX,
               mouseY,

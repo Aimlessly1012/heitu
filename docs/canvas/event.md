@@ -1,10 +1,10 @@
 ---
 group:
   title: 事件
-  order: 2
+  order: 3
 
 toc: content
-order: 3
+order: 1
 ---
 
 
@@ -13,6 +13,6 @@ order: 3
 ## 描述
 
 ## 演示
-  <code src="./eventDemo"></code>
+  <code src="./demo/eventDemo"></code>
 
 ## API

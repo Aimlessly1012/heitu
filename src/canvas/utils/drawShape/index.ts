@@ -12,7 +12,7 @@ import { drawText } from './text';
 export const drawShape = (stageState: StageState) => {
   const { ctx, element, children } = stageState;
   if (!ctx || !element) return;
-  ctx.clearRect(0, 0, element.width, element.height);
+  ctx.clearRect(0, 0, element.offsetWidth, element.offsetHeight);
   children?.forEach((item) => {
     const { data, type } = item;
     switch (type) {
@@ -26,7 +26,7 @@ export const drawShape = (stageState: StageState) => {
         drawText(ctx, data as IText);
         break;
       case 'Line':
-        drawLine(ctx, data as ILine);
+        item.path2D = drawLine(ctx, data as ILine);
         break;
       default:
         console.log(type, '该图形 暂未实现');

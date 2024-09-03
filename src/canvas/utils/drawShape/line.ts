@@ -75,4 +75,5 @@ export const drawLine = (ctx: CanvasRenderingContext2D, props: ILine) => {
   if (strokeStyle) ctx.strokeStyle = strokeStyle;
   if (lineWidth) ctx.lineWidth = lineWidth;
   ctx.stroke(path2D);
+  return path2D;
 };

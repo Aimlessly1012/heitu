@@ -6,12 +6,12 @@ export function drawRectCommon(ctx: CanvasRenderingContext2D, props: IRect) {
     y = 0,
     width = 100,
     height = 100,
-    shortLength = 100,
+    shortLength = width,
     fillStyle,
     strokeStyle,
     lineWidth,
+    img,
   } = props;
-
   const path2D = new Path2D();
 
   let _shortLength: number;
@@ -35,6 +35,14 @@ export function drawRectCommon(ctx: CanvasRenderingContext2D, props: IRect) {
   if (lineWidth) ctx.lineWidth = lineWidth;
   ctx.stroke(path2D);
   ctx.fill(path2D);
+  if (img) {
+    img.onload = function () {
+      ctx.drawImage(img, x, y, width, height);
+    };
+    img.onerror = function () {
+      console.error('Image failed to load.');
+    };
+  }
   return path2D;
 }
 

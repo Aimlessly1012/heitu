@@ -1,7 +1,7 @@
 ---
 nav:
   title: Canvas
-  order: 2
+  order: -1
 ---
 
 # 安装下载

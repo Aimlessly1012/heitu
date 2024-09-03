@@ -29,6 +29,7 @@ export function updateCanvas(
   }
   return null;
 }
+
 // 创建canvas
 export function createCanvas(containerWidth: number, containerHeight: number) {
   const canvasElement = document.createElement('canvas');

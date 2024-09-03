@@ -1,3 +1,4 @@
+import { useResizeObserver } from 'heitu/hooks';
 import React, { useLayoutEffect, useRef } from 'react';
 import { StageProps } from '.';
 import { Store } from '../../store';
@@ -14,14 +15,17 @@ const Stage = (props: StageProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const mergeProps = { ...defaultProps, ...props };
   const {
-    stage: {
-      initStage,
-    },
+    stage: { initStage, refreshDraw },
   } = store;
   useLayoutEffect(() => {
     if (ref.current) initStage(ref.current);
   }, []);
-  return <div ref={ref} style={mergeProps} />;
+  useResizeObserver(ref, () => refreshDraw());
+  return (
+    <>
+      <div ref={ref} style={mergeProps} />
+    </>
+  );
 };
 
 export default Stage;

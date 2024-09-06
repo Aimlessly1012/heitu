@@ -8,10 +8,10 @@ export interface ILine extends CommonShape {
   end?: { x: number; y: number };
   points?: number[];
   smooth?: boolean;
-  strokeStyle: string;
-  lineWidth: number;
-  lineCap: 'butt' | 'round' | 'square';
-  lineJoin: 'miter' | 'round' | 'miter';
+  strokeStyle?: string;
+  lineWidth?: number;
+  lineCap?: 'butt' | 'round' | 'square';
+  lineJoin?: 'miter' | 'round' | 'miter';
   // percent?: number; // 0 - 1
   // closed?: boolean;
 }

@@ -55,7 +55,7 @@ const useEvent = (
         stage?.children?.forEach((child) => {
           // 因为text 没有path2d 所以要根据位置确定
           if (
-            !child?.path2D &&
+            !child.data.path2D &&
             child.type === 'Text' &&
             isInTextShape(mouseX, mouseY, child.data)
           ) {
@@ -65,7 +65,7 @@ const useEvent = (
             isInShape({
               mouseX,
               mouseY,
-              path2D: child?.path2D,
+              path2D: child.data.path2D,
               ctx: stage?.ctx || undefined,
             })
           ) {
@@ -75,28 +75,33 @@ const useEvent = (
       }
       // 拖拽
       stage?.children?.forEach((child) => {
+        // 初始化
+        child.data.dragging = false;
+        child.data.offsetX = 0;
+        child.data.offsetY = 0;
+        // 改变位置
         if (
           child.data.draggable &&
           eventName === 'onMouseDown' &&
           (isInShape({
             mouseX,
             mouseY,
-            path2D: child?.path2D,
+            path2D: child.data?.path2D,
             ctx: stage?.ctx || undefined,
           }) ||
             isInTextShape(mouseX, mouseY, child.data))
         ) {
-          child.dragging = true;
+          child.data.dragging = true;
 
-          child.offsetX = child?.data?.x
+          child.data.offsetX = child?.data?.x
             ? evt.offsetX - child?.data?.x
             : evt.offsetX;
-          child.offsetY = child?.data?.y
+          child.data.offsetY = child?.data?.y
             ? evt.offsetY - child?.data?.y
             : evt.offsetY;
         }
         if (child.data.draggable && eventName === 'onMouseUp') {
-          child.dragging = false;
+          child.data.dragging = false;
         }
       });
     };
@@ -109,11 +114,11 @@ const useEvent = (
         const inShape = isInShape({
           mouseX,
           mouseY,
-          path2D: child?.path2D,
+          path2D: child.data.path2D,
           ctx: stage?.ctx || undefined,
         });
         // 因为text 没有path2d 所以要根据位置确定
-        if (!child?.path2D && child.type === 'Text') {
+        if (!child.data.path2D && child.type === 'Text') {
           if (
             child.data?.['onMouseEnter'] &&
             // @ts-ignore
@@ -146,26 +151,26 @@ const useEvent = (
         }
 
         // 拖拽 api
-        if (child.data.draggable && inShape && child.dragging) {
+        if (child.data.draggable && inShape && child.data.dragging) {
           const rect = stage.element?.getBoundingClientRect();
           const x = rect?.left ? evt.clientX - rect?.left : evt.clientX;
           const y = rect?.top ? evt.clientY - rect?.top : evt.clientY;
-          child.data.x = child?.offsetX ? x - child?.offsetX : x;
-          child.data.y = child?.offsetY ? y - child?.offsetY : y;
+          child.data.x = child.data.offsetX ? x - child.data.offsetX : x;
+          child.data.y = child.data.offsetY ? y - child.data.offsetY : y;
           drawShape(stage);
         }
 
         if (
           child.data.draggable &&
           isInTextShape(mouseX, mouseY, child.data) &&
-          child.dragging
+          child.data.dragging
         ) {
           console.log(isInTextShape(mouseX, mouseY, child.data));
           const rect = stage.element?.getBoundingClientRect();
           const x = rect?.left ? evt.clientX - rect?.left : evt.clientX;
           const y = rect?.top ? evt.clientY - rect?.top : evt.clientY;
-          child.data.x = child?.offsetX ? x - child?.offsetX : x;
-          child.data.y = child?.offsetY ? y - child?.offsetY : y;
+          child.data.x = child.data.offsetX ? x - child.data.offsetX : x;
+          child.data.y = child.data.offsetY ? y - child.data.offsetY : y;
           drawShape(stage);
         }
       });

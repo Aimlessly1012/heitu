@@ -4,10 +4,10 @@ class Stage {
   width: number;
   height: number;
   style: CSSProperties;
-  constructor() {
-    this.width = 0;
-    this.height = 0;
-    this.style = {};
+  content: HTMLDivElement;
+  constructor() {}
+  getContent() {
+    return this.content;
   }
 }
 export default Stage;

@@ -1,22 +1,30 @@
 // import { BoxHidden, Circle, Group, Line, Rect, Text } from './shape'
 
 import { ICircle } from './element/circle';
+import { IGroup } from './element/group';
 import { ILine } from './element/line';
 import { IRect } from './element/rect';
 import { IText } from './element/text';
+import { ChildData } from './store';
 
 export interface CommonShape {
-  zIndex: number;
-  cursor: CSSProperties['cursor'];
+  zIndex?: number;
+  cursor?: CSSProperties['cursor'];
   isHovered?: boolean;
   x?: number;
   y?: number;
   width?: number;
   height?: number;
-  draggable;
+  draggable?: boolean;
+  children?: ChildData[];
+  path2D?: Path2D;
+  dragging?: boolean;
+  offsetY?: number;
+  offsetX?: number;
+  parent?: Child[];
 }
 
-export type IShape = IRect | ICircle | IText | ILine;
+export type IShape = IRect | ICircle | IText | ILine | IGroup;
 
 // |Group | BoxHidden | Circle | Line | Text;
 export type IShapeType =

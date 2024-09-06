@@ -1,4 +1,4 @@
-import { forIn } from 'lodash-es';
+import { forIn, isNumber } from 'lodash-es';
 import { useEffect, useRef } from 'react';
 import { createContainer } from 'unstated-next';
 import { IShape, IShapeType } from '../type';
@@ -10,10 +10,6 @@ interface Child {
   id: string;
   data: ChildData;
   type: IShapeType;
-  path2D?: Path2D;
-  dragging?: boolean;
-  offsetY?: number;
-  offsetX?: number;
 }
 export interface StageState {
   ctx: CanvasRenderingContext2D | null;
@@ -90,15 +86,24 @@ const useStore = () => {
       off(data);
       curChildren = children.map((child: any) => {
         if (child.id === id) {
-          return { id, data, type };
+          return {
+            id,
+            data: { ...data, zIndex: isNumber(data.zIndex) ? data.zIndex : 1 },
+            type,
+          };
         }
         return child;
       });
     } else {
-      curChildren.push({ id, data, type });
+      curChildren.push({
+        id,
+        data: { ...data, zIndex: isNumber(data.zIndex) ? data.zIndex : 1 },
+        type,
+      });
       on(data);
     }
     stageRef.current.children = curChildren;
+
     drawShape(stageRef.current);
   };
   // 重新刷新画布

@@ -1,5 +1,5 @@
 import { Store } from 'heitu/canvas/store';
-import React, { CSSProperties, useEffect } from 'react';
+import React, { CSSProperties } from 'react';
 import Stage from './stage';
 
 export interface StageProps extends CSSProperties {
@@ -12,7 +12,6 @@ export interface StageProps extends CSSProperties {
 }
 
 const ContextStage = (props: StageProps) => {
-  useEffect(() => {}, []);
   return (
     <Store.Provider>
       <Stage {...props} />

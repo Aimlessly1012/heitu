@@ -12,7 +12,8 @@ const Index = () => {
           y={100}
           width={100}
           height={100}
-          fillStyle={'pink'}
+          fillStyle={'blue'}
+          zIndex={2}
           border={0}
           draggable
         />
@@ -23,6 +24,7 @@ const Index = () => {
           height={100}
           fillStyle={'pink'}
           border={0}
+          zIndex={1}
           draggable
         />
         <Text
@@ -31,6 +33,7 @@ const Index = () => {
           fontSize={20}
           content={"王明 是神"}
           fillStyle={'black'}
+          zIndex={10}
           draggable
         />
       </Stage>

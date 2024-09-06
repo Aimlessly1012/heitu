@@ -13,14 +13,15 @@ export const drawShape = (stageState: StageState) => {
   const { ctx, element, children } = stageState;
   if (!ctx || !element) return;
   ctx.clearRect(0, 0, element.offsetWidth, element.offsetHeight);
-  children?.forEach((item) => {
+  const sortChildren = children?.sort((a, b) => a.data.zIndex - b.data.zIndex);
+  sortChildren?.forEach((item) => {
     const { data, type } = item;
     switch (type) {
       case 'Rect':
-        item.path2D = drawRectCommon(ctx, data as IRect);
+        item.data.path2D = drawRectCommon(ctx, data as IRect);
         break;
       case 'Circle':
-        item.path2D = drawCircle(ctx, data as ICircle);
+        item.data.path2D = drawCircle(ctx, data as ICircle);
         break;
       case 'Text':
         // eslint-disable-next-line no-case-declarations
@@ -32,7 +33,9 @@ export const drawShape = (stageState: StageState) => {
 
         break;
       case 'Line':
-        item.path2D = drawLine(ctx, data as ILine);
+        item.data.path2D = drawLine(ctx, data as ILine);
+        break;
+      case 'Group':
         break;
       default:
         console.log(type, '该图形 暂未实现');

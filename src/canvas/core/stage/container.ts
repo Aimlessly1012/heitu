@@ -3,7 +3,7 @@ interface ChildType extends Node {
   parent: Node;
 }
 
-class Container {
+abstract class Container {
   children: Array<ChildType> = [];
   // 获取 子元素
   getChildren(filterFunc?: (item: Node) => boolean) {
@@ -49,6 +49,7 @@ class Container {
     if (children.length === 0) {
       return this;
     }
+
     if (children.length > 1) {
       for (let i = 0; i < children.length; i++) {
         this.add(children[i]);
@@ -56,21 +57,44 @@ class Container {
       return this;
     }
     const child = children[0];
-    if (child.getParent()) {
-      child.moveTo(this);
-      return this;
-    }
-    // this._validateAdd(child);
-    child.index = this.getChildren().length;
+
+    child.index = child.index ? child.index : this.getChildren().length;
     child.parent = this;
-    child._clearCaches();
     this.getChildren().push(child);
-    // this._fire('add', {
-    //   child: child,
-    // });
-    // this._requestDraw();
-    // chainable
+
     return this;
+  }
+  // 排序
+  sortChildren(sortFunc: (a: Node, b: Node) => number) {
+    return this.getChildren().sort(sortFunc);
+  }
+
+  deduplication() {
+    this.getChildren();
+    const currentChildren = [] as Array<ChildType>;
+    this.getChildren().forEach((child) => {
+      const isExist = currentChildren.some((item) => {
+        return item === child;
+      });
+      if (!isExist) {
+        currentChildren.push(child);
+      }
+    });
+
+    this.children = currentChildren;
+    return currentChildren;
+  }
+  batchDraw(ctx: CanvasRenderingContext2D) {
+    // 排序
+    this.sortChildren((a, b) => a.index - b.index);
+    // 去重 （后面覆盖前面的）
+    this.deduplication();
+    // 绘制
+    this.getChildren().forEach((child) => {
+      if (ctx) {
+        child.draw(ctx);
+      }
+    });
   }
 }
 export default Container;

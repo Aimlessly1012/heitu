@@ -40,6 +40,6 @@ export default () => {
 
 ## Arguments
 
-| name | description    | type                         | default |
-| ---- | -------------- | ---------------------------- | ------- |
-| ref  | 需要处理的 ref | React.RefObject<HTMLElement> | -       |
+| name | description        | type | default |
+| ---- | ------------------ | ---- | ------- |
+| ref  | 需要处理的元素 ref | -    |

@@ -1,7 +1,7 @@
 ---
 nav:
   title: 使用指南
-  order: 0
+  order: -1
 group:
   title: 指南
   order: -1

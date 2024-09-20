@@ -15,9 +15,9 @@ order: 3
 
 - 演示推荐 打开左右控制台拖拽
 
-<!-- ## 动画显示 -->
+## 动画显示
 
-<!-- <code src="./demo/stageDemo1"></code> -->
+<code src="./demo/stageDemo1"></code>
 
 ## 基础显示
 

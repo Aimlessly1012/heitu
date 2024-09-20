@@ -1,7 +1,7 @@
 ---
 nav:
   title: Canvas
-  order: 1
+  order: 2
 ---
 
 # heitu - Canvas

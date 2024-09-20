@@ -6,6 +6,7 @@ group:
 toc: content
 order: 2
 ---
+
 # useElementSize
 
 ## 描述
@@ -14,16 +15,16 @@ order: 2
 
 ## 演示
 
-
 ```tsx
 import React, { useRef, useEffect } from 'react';
 import { useElementSize } from 'heitu';
 
-
 export default () => {
   const ref = useRef(null);
   const size = useElementSize(ref);
-useEffect(() => {console.log(ref.current.mount)},[])
+  useEffect(() => {
+    console.log(ref.current.mount);
+  }, []);
   return (
     <div>
       <textarea
@@ -39,12 +40,6 @@ useEffect(() => {console.log(ref.current.mount)},[])
 
 ## Arguments
 
-| name        | description            | type                     | default                                        |
-| ----------- | ---------------------- | ------------------------ | ---------------------------------------------- |
-
-
-## return
-
-| name      | description              | type                                        | default |
-| --------- | ------------------------ | ------------------------------------------- | ------- |
-
+| name | description    | type                         | default |
+| ---- | -------------- | ---------------------------- | ------- |
+| ref  | 需要处理的 ref | React.RefObject<HTMLElement> | -       |

@@ -1,4 +1,6 @@
+import { isInShape } from 'heitu/canvas/utils';
 import { forIn } from 'lodash-es';
+import { dpr } from '../constant';
 import Node from './node';
 export type ICoord = { x: number; y: number };
 interface ICircle {
@@ -17,6 +19,8 @@ interface ICircle {
 }
 
 class Circle extends Node {
+  name = 'Circle';
+  parent = null;
   x: number;
   y: number;
   radius: number;
@@ -28,6 +32,7 @@ class Circle extends Node {
   endAngle: number; // 圆弧 饼图
   innerRadius: number;
   index: number;
+  path2D: Path2D | null;
   border: 0 | 1 | 2; // 0 填充 1  只有边框  2 边框和填充
   constructor(config: ICircle) {
     super();
@@ -43,6 +48,7 @@ class Circle extends Node {
     this.innerRadius = 0;
     this.arc = false;
     this.index = 0;
+    this.path2D = null;
     forIn(config, (value, key) => {
       if (value) (this as any)[key] = value;
     });
@@ -128,12 +134,14 @@ class Circle extends Node {
         if (this.lineWidth) ctx.lineWidth = this.lineWidth; // 描边宽度
         ctx.stroke(circlePath);
         ctx.fill(circlePath);
+        this.path2D = circlePath;
         return circlePath;
       case 1:
         circlePath = new Path2D(this.calcRingD(isWholeArc));
         ctx.lineWidth = this.lineWidth;
         if (this.strokeStyle) ctx.strokeStyle = this.strokeStyle; // 描边颜色
         ctx.stroke(circlePath);
+        this.path2D = circlePath;
         return circlePath;
       case 2:
         circlePath = new Path2D(this.calcRingD(isWholeArc));
@@ -143,8 +151,22 @@ class Circle extends Node {
         if (this.lineWidth) ctx.lineWidth = this.lineWidth; // 描边宽度
         ctx.stroke(circlePath);
         ctx.fill(circlePath);
+        this.path2D = circlePath;
         return circlePath;
     }
+  }
+  inScope(evt: MouseEvent, ctx: CanvasRenderingContext2D) {
+    const mouseX = evt.offsetX * dpr;
+    const mouseY = evt.offsetY * dpr;
+    if (this?.path2D) {
+      return isInShape({
+        mouseX,
+        mouseY,
+        path2D: this?.path2D,
+        ctx: ctx || undefined,
+      });
+    }
+    return false;
   }
 }
 

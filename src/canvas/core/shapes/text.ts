@@ -1,4 +1,6 @@
+import { isInTextShape } from 'heitu/canvas/utils';
 import { forIn } from 'lodash-es';
+import { dpr } from '../constant';
 import Node from './node';
 
 interface IText {
@@ -25,6 +27,8 @@ interface IText {
   index?: number;
 }
 class Text extends Node {
+  name = 'Text';
+  parent = null;
   x: number;
   y: number;
   content: string;
@@ -65,6 +69,11 @@ class Text extends Node {
     this.height = this.fontSize;
 
     return this;
+  }
+  inScope(evt: MouseEvent) {
+    const mouseX = evt.offsetX * dpr;
+    const mouseY = evt.offsetY * dpr;
+    return isInTextShape(mouseX, mouseY, this);
   }
 }
 

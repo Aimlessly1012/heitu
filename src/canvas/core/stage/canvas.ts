@@ -1,5 +1,5 @@
 import { dpr } from '../constant';
-import { createCanvasElement } from './until';
+import { createCanvasElement } from './utils';
 
 // interface ICanvasConfig {
 //   width?: number;

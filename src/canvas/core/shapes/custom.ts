@@ -2,17 +2,16 @@ import { isInShape } from 'heitu/canvas/utils';
 import { forIn } from 'lodash-es';
 import { dpr } from '../constant';
 import Node from './node';
-interface IRect {
+interface ICustom {
   x?: number;
   y?: number;
-  width?: number;
-  height?: number;
+  path2D: Path2D | null;
   fillStyle?: string;
   strokeStyle?: string;
   lineWidth?: number;
 }
-class Rect extends Node {
-  name = 'Rect';
+class Custom extends Node {
+  name = 'Custom';
   x: number;
   y: number;
   width: number;
@@ -23,15 +22,18 @@ class Rect extends Node {
   index: number;
   path2D: Path2D | null;
   parent = null;
-  constructor(config: IRect) {
+  constructor(config: ICustom) {
     super();
+    if (!config.path2D) {
+      throw new Error('Mast has key of path2D');
+    }
     this.x = 100;
     this.y = 100;
-    this.width = 100;
-    this.height = 100;
+    this.width = 0;
+    this.height = 0;
     this.fillStyle = null;
     this.strokeStyle = null;
-    this.lineWidth = null;
+    this.lineWidth = 1;
     this.path2D = null;
     this.index = 0;
     forIn(config, (value, key) => {
@@ -39,21 +41,13 @@ class Rect extends Node {
     });
   }
   draw(ctx: CanvasRenderingContext2D) {
-    const path2D = new Path2D();
-
-    path2D.moveTo(this.x, this.y);
-
-    path2D.lineTo(this.x + this.width, this.y);
-    path2D.lineTo(this.x + this.width, this.y + this.height);
-    path2D.lineTo(this.x, this.y + this.height);
-
-    path2D.closePath();
+    if (!this.path2D) return;
     if (this.fillStyle) ctx.fillStyle = this.fillStyle;
     if (this.strokeStyle) ctx.strokeStyle = this.strokeStyle;
     if (this.lineWidth) ctx.lineWidth = this.lineWidth;
-    if (this.lineWidth) ctx.stroke(path2D);
-    if (this.fillStyle) ctx.fill(path2D);
-    this.path2D = path2D;
+    if (this.lineWidth) ctx.stroke(this.path2D);
+    if (this.fillStyle) ctx.fill(this.path2D);
+
     return this;
   }
   inScope(evt: MouseEvent, ctx: CanvasRenderingContext2D) {
@@ -71,4 +65,4 @@ class Rect extends Node {
   }
 }
 
-export default Rect;
+export default Custom;

@@ -45,10 +45,12 @@ export default () => {
 
 ## Arguments
 
-| name | description | type | default |
-| ---- | ----------- | ---- | ------- |
+| name  | description      | type | default |
+| ----- | ---------------- | ---- | ------- |
+| props | 需要存储的 props | any  | -       |
 
 ## return
 
-| name | description | type | default |
-| ---- | ----------- | ---- | ------- |
+| name | description  | type | default |
+| ---- | ------------ | ---- | ------- |
+| prev | 上一个 props | any  | -       |

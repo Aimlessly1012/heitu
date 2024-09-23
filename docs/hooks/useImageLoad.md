@@ -24,28 +24,36 @@ import { useImageLoad } from 'heitu';
 export default () => {
   const list = [
     'https://www.yhwxj.com/wp-content/uploads/2022/08/2022081509213479.png',
-    'http://www.jsti.com/uploadfile/2020/0727/20200727051250381.jpg',
+    'https://cdn.pixabay.com/photo/2023/08/11/08/29/highland-cattle-8183107_640.jpg',
     'http://whhysz.com/upload/20210507/6094e47dce9c1.jpg',
   ];
-  const [img, ftimgList, allowImgList] = useImageLoad({ imgList: list });
+  const [img, ftimgList, allowImgList, loading] = useImageLoad({
+    imgList: list,
+  });
   return (
     <div style={{ display: 'flex' }}>
-      <div>
-        <div>img</div>
-        <img src={img} style={{ width: 200 }} />
-      </div>
-      <div>
-        <div>ftimgList</div>
-        {ftimgList?.map((item, index) => (
-          <img src={item} key={index} style={{ width: 200 }} />
-        ))}
-      </div>
-      <div>
-        <div>allowImgList</div>
-        {allowImgList?.map((item, index) => (
-          <img src={item} key={index} style={{ width: 200 }} />
-        ))}
-      </div>
+      {loading ? (
+        'loading'
+      ) : (
+        <>
+          <div>
+            <div>img</div>
+            <img src={img} style={{ width: 200 }} />
+          </div>
+          <div>
+            <div>ftimgList</div>
+            {ftimgList?.map((item, index) => (
+              <img src={item} key={index} style={{ width: 200 }} />
+            ))}
+          </div>
+          <div>
+            <div>allowImgList</div>
+            {allowImgList?.map((item, index) => (
+              <img src={item} key={index} style={{ width: 200 }} />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 };

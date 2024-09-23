@@ -2,13 +2,13 @@ export type AnimateCartoonConfig = {
   duration?: number; // 毫秒
   delay?: number;
   during?: (percent: number, newState: Record<string, string | number>) => void;
-  done?: Function;
-  aborted?: Function;
+  done?: () => void;
+  aborted?: () => void;
   scope?: string;
   force?: boolean;
   additive?: boolean;
   setToFinal?: boolean;
-  easing?: Easing;
+  easing?: any;
   iterationCount?: number; // Infinity
 };
 abstract class Animate {
@@ -18,10 +18,10 @@ abstract class Animate {
   // 检查边缘
   checkEdge() {}
   // 更新
-  onUpdate(currentProp, elapsedTimeRatio: number) {}
+  // onUpdate(currentProp, elapsedTimeRatio: number) {}
   // 停止
   stop() {
-    cancelAnimationFrame(this.rafTimer);
+    // cancelAnimationFrame(this.rafTimer);
   }
 }
 export default Animate;

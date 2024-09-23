@@ -1,6 +1,6 @@
 export * from './canvas';
 export * from './hooks';
-export * from './charts';
+// export * from './charts';
 
 
 

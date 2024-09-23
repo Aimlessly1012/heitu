@@ -29,7 +29,7 @@ const useImageLoad = ({ imgList }: { imgList: string[] }) => {
   useEffect(() => {
     if (imgList?.length > 1) loopGetImgUrl(imgList?.[0], 0);
   }, []);
-  console.log(img, imgFT, imgAllow);
+  // console.log(img, imgFT, imgAllow);
   if (imgFT.length !== imgList.length) {
     return [];
   }

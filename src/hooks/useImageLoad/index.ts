@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { errSrc } from './errImg';
 
 const useImageLoad = ({ imgList }: { imgList: string[] }) => {
+  const [loading, setLoading] = useState<boolean>(false);
   const [img, setImg] = useState<string>('');
   const [imgFT, setImgFT] = useState<string[]>([]);
   const [imgAllow, setImgAllow] = useState<string[]>([]);
@@ -15,25 +16,34 @@ const useImageLoad = ({ imgList }: { imgList: string[] }) => {
       setImgAllow((prev) => [...prev, url]);
 
       if (!isfirst) setImg(url);
-
-      if (index < imgList.length - 1) loopGetImgUrl(imgList[next], next, true);
-      console.log(isfirst, 'isfirstisfirst');
+      if (index < imgList.length - 1) {
+        loopGetImgUrl(imgList[next], next, true);
+      } else {
+        setLoading(false);
+      }
     };
 
     imgInstance.onerror = () => {
       setImgFT((prev) => [...prev, errSrc]);
 
-      if (next < imgList.length - 1) loopGetImgUrl(imgList[next], next);
+      if (next < imgList.length - 1) {
+        loopGetImgUrl(imgList[next], next);
+      } else {
+        setLoading(false);
+      }
     };
   };
   useEffect(() => {
-    if (imgList?.length > 1) loopGetImgUrl(imgList?.[0], 0);
+    if (imgList?.length > 1) {
+      setLoading(true);
+      loopGetImgUrl(imgList?.[0], 0);
+    }
   }, []);
-  // console.log(img, imgFT, imgAllow);
+  console.log([img, imgFT, imgAllow, loading]);
   if (imgFT.length !== imgList.length) {
-    return [];
+    return ['', [], [], true];
   }
-  return [img, imgFT, imgAllow];
+  return [img, imgFT, imgAllow, loading];
 };
 
 export default useImageLoad;

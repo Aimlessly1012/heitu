@@ -80,7 +80,7 @@
     "@types/qs": "^6.9.15",
     "@types/urijs": "^1.19.25",
     "@types/uuid": "^10.0.0",
-    "axios": "^1.7.2",
+    "axios": "^1.7.7",
     "fflate": "^0.8.2",
     "js-cookie": "^3.0.5",
     "lodash-es": "^4.17.21",

@@ -1,6 +1,5 @@
 import { defineConfig } from 'dumi';
 
-
 export default defineConfig({
   outputPath: 'docs-dist',
   themeConfig: {
@@ -13,4 +12,11 @@ export default defineConfig({
   base: '/',
   publicPath: '/',
   exportStatic: {}, // 将所有路由输出为 HTML 目录结构，以免刷新页面时 404
+  proxy: {
+    '/api': {
+      target: 'http://google.com', // 目标服务器地址
+      changeOrigin: true,
+      pathRewrite: { '^/api': '' },
+    },
+  },
 });

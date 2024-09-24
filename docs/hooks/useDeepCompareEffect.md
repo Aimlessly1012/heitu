@@ -4,7 +4,7 @@ group:
   order: 5
 
 toc: content
-order: 2
+order: 3
 ---
 
 # useDeepCompareEffect

@@ -31,7 +31,6 @@ const useHtAxios = ({
     responseInterceptorOnErrorCallback,
   );
 
-
   // 导出方法
   function get<T, R>(
     url: string,

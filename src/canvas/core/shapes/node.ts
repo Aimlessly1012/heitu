@@ -1,5 +1,5 @@
 import { isStage } from 'heitu/canvas/utils';
-import { forIn } from 'lodash-es';
+import { forIn, isEmpty } from 'lodash-es';
 import Stage from '../stage';
 
 export type ICoord = { x: number; y: number };
@@ -54,16 +54,16 @@ abstract class Node {
         name: handler.name || '',
         handler: handler,
       });
-      if (this?.parent && isStage(this?.parent)) {
-        if (!this?.parent.shapeEventListeners[baseEvent]) {
-          this.parent.shapeEventListeners[baseEvent] = [];
-        }
+      // if (this?.parent && isStage(this?.parent)) {
+      //   if (!this?.parent.shapeEventListeners[baseEvent]) {
+      //     this.parent.shapeEventListeners[baseEvent] = [];
+      //   }
 
-        this.parent.shapeEventListeners[baseEvent].push({
-          name: handler.name || '',
-          handler: handler,
-        });
-      }
+      //   this.parent.shapeEventListeners[baseEvent].push({
+      //     name: handler.name || '',
+      //     handler: handler,
+      //   });
+      // }
     }
     return this;
   }
@@ -121,9 +121,16 @@ abstract class Node {
         item.handler(evt);
       });
     } else {
-      this.shapeEventListeners[eventType].forEach((item) => {
-        item.handler(evt);
-      });
+      if (currentTarget?.eventListeners?.[eventType]?.length > 0) {
+        currentTarget.eventListeners[eventType].forEach((item: { handler: (evt: MouseEvent) => void }) => {
+          item.handler(evt);
+        });
+      }
+      if (currentTarget?.draggable) {
+        currentTarget.eventListeners?.[eventType]?.forEach((item: { handler: (evt: MouseEvent) => void }) => {
+          item?.handler(evt);
+        });
+      }
     }
   }
 
@@ -146,12 +153,12 @@ abstract class Node {
       // 将时间推送到最顶层中
       const children = (target as Stage)?.children;
       for (let i = 0; i < children.length; i++) {
-        if (
-          !this.shapeEventListeners[eventType] ||
-          this.shapeEventListeners[eventType].length < 1
-        ) {
-          this.shapeEventListeners[eventType] = [];
-        }
+        // if (
+        //   !this.shapeEventListeners[eventType] ||
+        //   this.shapeEventListeners[eventType].length < 1
+        // ) {
+        //   this.shapeEventListeners[eventType] = [];
+        // }
         // @ts-ignore
         const dragShapes = [...this.children.filter((item) => item.draggable)];
         // 拖拽 按下
@@ -172,11 +179,14 @@ abstract class Node {
               : evt.offsetY;
           }
         }
-        this.fire(eventType, {
-          evt,
-          target: target,
-          currentTarget: children[i],
-        });
+
+        if (!isEmpty(children[i]?.eventListeners) || children[i]?.draggable) {
+          this.fire(eventType, {
+            evt,
+            target: target,
+            currentTarget: children[i],
+          });
+        }
       }
     } else {
       // 处理拖拽 松开
@@ -230,7 +240,7 @@ abstract class Node {
           if (
             eventType === 'mousemove' &&
             !currentTarget.mouseInScope &&
-            target.shapeEventListeners.mouseenter?.length > 0
+            currentTarget.eventListeners.mouseenter?.length > 0
           ) {
             currentTarget.mouseInScope = true;
             target._fire('mouseenter', evt, currentTarget);
@@ -239,7 +249,7 @@ abstract class Node {
           // 处理 除了移出 鼠标事件
           if (eventType === 'mousemove') {
             currentTarget.mouseInScope = false;
-            if (target.shapeEventListeners['mouseleave']?.length > 0) {
+            if (target.eventListeners['mouseleave']?.length > 0) {
               target._fire('mouseleave', evt, currentTarget);
             }
           }

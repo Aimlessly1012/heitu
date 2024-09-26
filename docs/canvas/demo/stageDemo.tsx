@@ -151,7 +151,7 @@ const StageDemo = () => {
   }, []);
 
   useResizeObserver(container, () => _stage._resizeDOM());
-  console.log(_stage);
+  // console.log(_stage);
   return (
     <>
       <div ref={container}></div>

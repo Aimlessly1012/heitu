@@ -1,4 +1,5 @@
 import { isStage } from 'heitu/canvas/utils';
+import { forIn } from 'lodash-es';
 import Stage from '../stage';
 
 export type ICoord = { x: number; y: number };
@@ -245,6 +246,13 @@ abstract class Node {
         }
       }
     }
+  }
+  attr(props: any) {
+    if (!this.parent) return;
+    forIn(props, (value, key) => {
+      if (value) (this as any)[key] = value;
+    });
+    this.parent?.batchDraw(this.parent);
   }
 }
 export default Node;

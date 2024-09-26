@@ -66,7 +66,7 @@ class Circle extends Node {
     return { x, y };
   }
   calcWholeRingD() {
-    const outerM_y = this.x - this.radius;
+    const outerM_y = this.y - this.radius;
 
     const outerM = `M ${this.x} ${outerM_y}`;
     const outerA = `A ${this.radius} ${this.radius} 0 1 1 ${

@@ -25,12 +25,13 @@ const StageDemo = () => {
 
   _stage.add(_circle1, _circle2);
 
-  const ani = new Animate(
-    { value: 0 },
-    { value: 360 },
-    { duration: 1000, easing: 'quadraticInOut' },
-  );
+ 
   const onclick = () => {
+    const ani = new Animate(
+      { value: 0 },
+      { value: 360 },
+      { duration: 1000, easing: 'quadraticInOut' },
+    );
     ani.start();
     const x = _circle1.x;
     const y = _circle1.y;
@@ -51,6 +52,11 @@ const StageDemo = () => {
       container: container.current,
       backgroundColor: '#fff',
     });
+    const ani = new Animate(
+      { value: 0 },
+      { value: 360 },
+      { duration: 1000, easing: 'quadraticInOut' },
+    );
     ani.start();
     const radius = _circle2.radius;
     let curRadius = _circle2.radius;
@@ -61,6 +67,7 @@ const StageDemo = () => {
       _circle2.attr({ radius: radius + curRadius });
     };
     ani.pushQueue(onUpdate);
+    return () => ani.stop();
   }, []);
 
   useResizeObserver(container, () => _stage._resizeDOM());

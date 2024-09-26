@@ -41,7 +41,7 @@ class Animate {
   start() {
     const { duration, easing, during, iterationCount } = this.cfg;
     const keys = Object.keys(this.targetProp);
-
+    let aa = 1;
     const rafCb = (timestamp: number) => {
       if (!this.startTime) {
         this.startTime = timestamp;
@@ -49,9 +49,9 @@ class Animate {
       let elapsedTimeRatio = easingFuncs[easing as keyof typeof easingFuncs](
         Math.min((timestamp - this.startTime) / duration, 1),
       );
-      // if (this.forward === false) {
-      //   elapsedTimeRatio = 1 - elapsedTimeRatio;
-      // }
+      if (this.forward === false) {
+        elapsedTimeRatio = 1 - elapsedTimeRatio;
+      }
       const currentProp = {};
       keys.forEach((propKey) => {
         const targetValue = calcTargetValue(
@@ -71,6 +71,7 @@ class Animate {
         this.rafTimer = requestAnimationFrame(rafCb);
       } else {
         this.queue = [];
+        this.stop();
       }
 
       if (this.queue.length > 0) {

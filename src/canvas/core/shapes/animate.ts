@@ -41,10 +41,8 @@ class Animate {
   start() {
     const { duration, easing, during, iterationCount } = this.cfg;
     const keys = Object.keys(this.targetProp);
-    let aa = 1;
+
     const rafCb = (timestamp: number) => {
-      console.log(aa);
-      aa++;
       if (!this.startTime) {
         this.startTime = timestamp;
       }
@@ -73,7 +71,7 @@ class Animate {
         this.rafTimer = requestAnimationFrame(rafCb);
       } else {
         this.queue = [];
-        this.stop()
+        this.stop();
       }
 
       if (this.queue.length > 0) {

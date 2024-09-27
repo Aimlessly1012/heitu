@@ -11,9 +11,9 @@ order: 1
 
 ## 描述
 
-<!-- ## 动画显示
+## 动画显示
 
-<code src="./demo/stageDemo1"></code> -->
+<code src="./demo/stageDemo1"></code>
 
 ## 基础显示
 

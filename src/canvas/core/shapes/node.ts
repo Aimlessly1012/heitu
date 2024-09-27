@@ -27,9 +27,7 @@ abstract class Node {
   eventListeners: {
     [index: string]: Array<{ name: string; handler: any }>;
   } = {};
-  shapeEventListeners: {
-    [index: string]: Array<{ name: string; handler: any }>;
-  } = {};
+
   abstract parent?: Stage | null;
   on<K extends keyof NodeEventMap>(
     evtStr: K,
@@ -50,7 +48,7 @@ abstract class Node {
       if (!this.eventListeners[baseEvent]) {
         this.eventListeners[baseEvent] = [];
       }
-      console.log( this.eventListeners[baseEvent]);
+      console.log(this.eventListeners[baseEvent]);
       this.eventListeners[baseEvent].push({
         name: handler?.name || '',
         handler: handler,
@@ -160,30 +158,45 @@ abstract class Node {
       // 将时间推送到最顶层中
       const children = (target as Stage)?.children;
       for (let i = 0; i < children.length; i++) {
-        // if (
-        //   !this.shapeEventListeners[eventType] ||
-        //   this.shapeEventListeners[eventType].length < 1
-        // ) {
-        //   this.shapeEventListeners[eventType] = [];
-        // }
-        // @ts-ignore
-        const dragShapes = [...this.children.filter((item) => item.draggable)];
+        const dragShapes = [...children.filter((item: any) => item.draggable)];
         // 拖拽 按下
         if (eventType === 'mousedown') {
-          const inScopeDragShape = dragShapes.filter((item) => {
+          const inScopeDragShape = dragShapes.filter((item: any) => {
             return item?.inScope(evt, target.canvas?.context);
           });
           const topInScopeDragShape = inScopeDragShape.sort(
             (a, b) => b.index - a.index,
           )[0];
+
           if (topInScopeDragShape) {
-            topInScopeDragShape.dragging = true;
-            topInScopeDragShape.offsetX = topInScopeDragShape?.x
-              ? evt.offsetX - topInScopeDragShape?.x
-              : evt.offsetX;
-            topInScopeDragShape.offsetY = topInScopeDragShape?.y
-              ? evt.offsetY - topInScopeDragShape?.y
-              : evt.offsetY;
+            if (topInScopeDragShape.name === 'Group') {
+              topInScopeDragShape.dragging = true;
+              topInScopeDragShape.children.forEach((child: any) => {
+                // child.dragging = true;
+                // @ts-ignore
+                child.offsetX = child?.x
+                  ? // @ts-ignore
+                    evt.offsetX - child?.x
+                  : evt.offsetX;
+                // @ts-ignore
+                child.offsetY = child?.y
+                  ? // @ts-ignore
+                    evt.offsetY - child?.y
+                  : evt.offsetY;
+              });
+            } else {
+              topInScopeDragShape.dragging = true;
+              // @ts-ignore
+              topInScopeDragShape.offsetX = topInScopeDragShape?.x
+                ? // @ts-ignore
+                  evt.offsetX - topInScopeDragShape?.x
+                : evt.offsetX;
+              // @ts-ignore
+              topInScopeDragShape.offsetY = topInScopeDragShape?.y
+                ? // @ts-ignore
+                  evt.offsetY - topInScopeDragShape?.y
+                : evt.offsetY;
+            }
           }
         }
 
@@ -218,6 +231,25 @@ abstract class Node {
           currentTarget.y = currentTarget?.offsetY
             ? y - currentTarget?.offsetY
             : y;
+        } else if (currentTarget.name === 'Group') {
+          const x = rect?.left ? evt.clientX - rect?.left : evt.clientX;
+          const y = rect?.top ? evt.clientY - rect?.top : evt.clientY;
+          currentTarget.children.forEach((child: any) => {
+            if (child.name === 'Text') {
+              // @ts-ignore
+              const x = rect?.left ? evt.clientX - rect?.left : evt.clientX;
+              const y = rect?.top ? evt.clientY - rect?.top : evt.clientY;
+              child.x = child?.offsetX
+                ? x - child?.offsetX
+                : x;
+                child.y = child?.offsetY
+                ? y - child?.offsetY
+                : y;
+            } else {
+              child.x = child?.offsetX ? x - child?.offsetX : x;
+              child.y = child?.offsetY ? y - child?.offsetY : y;
+            }
+          });
         } else {
           const x = rect?.left ? evt.clientX - rect?.left : evt.clientX;
           const y = rect?.top ? evt.clientY - rect?.top : evt.clientY;

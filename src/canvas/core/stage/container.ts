@@ -2,7 +2,7 @@ import Stage from '.';
 import Node from '../shapes/node';
 import { Node as INode } from '../type';
 
-interface ChildType extends Node {
+export interface ChildType extends Node {
   parent: Stage | null;
   index: number;
   remove: () => void;

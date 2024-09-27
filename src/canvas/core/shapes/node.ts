@@ -1,4 +1,5 @@
 import { isStage } from 'heitu/canvas/utils';
+import { isFunction } from 'heitu/utils/is';
 import { forIn, isEmpty } from 'lodash-es';
 import Stage from '../stage';
 
@@ -49,9 +50,9 @@ abstract class Node {
       if (!this.eventListeners[baseEvent]) {
         this.eventListeners[baseEvent] = [];
       }
-
+      console.log( this.eventListeners[baseEvent]);
       this.eventListeners[baseEvent].push({
-        name: handler.name || '',
+        name: handler?.name || '',
         handler: handler,
       });
       // if (this?.parent && isStage(this?.parent)) {
@@ -122,14 +123,20 @@ abstract class Node {
       });
     } else {
       if (currentTarget?.eventListeners?.[eventType]?.length > 0) {
-        currentTarget.eventListeners[eventType].forEach((item: { handler: (evt: MouseEvent) => void }) => {
-          item.handler(evt);
-        });
+        currentTarget.eventListeners[eventType].forEach(
+          (item: { handler: (evt: MouseEvent, node: any) => void }) => {
+            item.handler(evt, currentTarget);
+          },
+        );
       }
       if (currentTarget?.draggable) {
-        currentTarget.eventListeners?.[eventType]?.forEach((item: { handler: (evt: MouseEvent) => void }) => {
-          item?.handler(evt);
-        });
+        if (isFunction(currentTarget?.draggable) && currentTarget.dragging)
+          currentTarget?.draggable(evt, currentTarget);
+        currentTarget.eventListeners?.[eventType]?.forEach(
+          (item: { handler: (evt: MouseEvent, node: any) => void }) => {
+            item.handler(evt, currentTarget);
+          },
+        );
       }
     }
   }

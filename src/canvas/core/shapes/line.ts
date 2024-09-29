@@ -29,6 +29,10 @@ class Line extends Node {
   index: number;
   path2D: Path2D | null;
   parent = null;
+  shadowColor: string;
+  shadowBlur: number = 0;
+  shadowOffsetY: number = 0;
+  shadowOffsetX: number = 0;
   constructor(config: ILine) {
     super();
     this.start = { x: 10, y: 10 };
@@ -41,6 +45,7 @@ class Line extends Node {
     this.smooth = false;
     this.index = 0;
     this.path2D = null;
+    this.shadowColor = 'transparent';
     forIn(config, (value, key) => {
       if (value) (this as any)[key] = value;
     });
@@ -103,6 +108,15 @@ class Line extends Node {
       : this.calcStraightPath2D();
     if (this.strokeStyle) ctx.strokeStyle = this.strokeStyle;
     if (this.lineWidth) ctx.lineWidth = this.lineWidth;
+    if (this.shadowColor) {
+      // 设置阴影属性
+      ctx.shadowColor = this.shadowColor; // 阴影颜色
+      ctx.shadowBlur = this.shadowBlur; // 阴影模糊程度
+      ctx.shadowOffsetX = this.shadowOffsetX; // 阴影的水平偏移
+      ctx.shadowOffsetY = this.shadowOffsetY; // 阴影的垂直偏移
+    } else {
+      ctx.shadowColor = 'transparent'; // 取消阴影效果
+    }
     ctx.stroke(path2D);
     return this;
   }

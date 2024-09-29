@@ -34,6 +34,10 @@ class Circle extends Node {
   index: number;
   path2D: Path2D | null;
   border: 0 | 1 | 2; // 0 填充 1  只有边框  2 边框和填充
+  shadowColor: string;
+  shadowBlur: number = 0;
+  shadowOffsetY: number = 0;
+  shadowOffsetX: number = 0;
   constructor(config: ICircle) {
     super();
     this.x = 10;
@@ -49,6 +53,7 @@ class Circle extends Node {
     this.arc = false;
     this.index = 0;
     this.path2D = null;
+    this.shadowColor = 'transparent';
     forIn(config, (value, key) => {
       if (value) (this as any)[key] = value;
     });
@@ -125,6 +130,15 @@ class Circle extends Node {
   draw(ctx: CanvasRenderingContext2D) {
     const isWholeArc = this.startAngle === 0 && this.endAngle === 360; // 是否是整圆
     let circlePath;
+    if (this.shadowColor) {
+      // 设置阴影属性
+      ctx.shadowColor = this.shadowColor; // 阴影颜色
+      ctx.shadowBlur = this.shadowBlur; // 阴影模糊程度
+      ctx.shadowOffsetX = this.shadowOffsetX; // 阴影的水平偏移
+      ctx.shadowOffsetY = this.shadowOffsetY; // 阴影的垂直偏移
+    } else {
+      ctx.shadowColor = 'transparent'; // 取消阴影效果
+    }
     switch (this.border) {
       case 0:
         circlePath = new Path2D(this.calcRingD(isWholeArc));

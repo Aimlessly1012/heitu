@@ -54,11 +54,16 @@ export default () => {
     height: 100,
   });
   const _rect1 = new Rect({
-    fillStyle: '#eee',
+    fillStyle: 'rgba(255, 255, 255, 1)',
     x: 100,
     y: 250,
     width: 200,
     height: 100,
+    shadowColor: 'rgba(0, 0, 0, 0.3)', // 阴影颜色
+    shadowBlur: 50, // 阴影模糊度
+    shadowOffsetX: 10, // 阴影水平偏移
+    shadowOffsetY: 10, // 阴影垂直偏移
+    radius: 4,
   });
   _group.add(_circle1, _rect);
   _group1.add(_rect1, _text, _text1);

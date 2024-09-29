@@ -54,8 +54,8 @@ const StageDemo = () => {
     });
     const ani = new Animate(
       { value: 0 },
-      { value: 360 },
-      { duration: 1000, easing: 'quadraticInOut' },
+      { value: 3 },
+      { duration: 10000, easing: 'quadraticInOut' },
     );
     ani.start();
     const radius = _circle2.radius;

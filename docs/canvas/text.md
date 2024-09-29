@@ -61,3 +61,7 @@ export default () => {
 | lineHeight     | 行高             | number          | 1                  |
 | letterSpacing  | 字符间距         | number          | 0                  |
 | index          | 层级             | number          | -                  |
+| shadowColor    | 阴影颜色         | string          | -                  |
+| shadowBlur     | 阴影模糊度       | number          | -                  |
+| shadowOffsetX  | 阴影水平偏移     | number          | -                  |
+| shadowOffsetY  | 阴影垂直偏移     | number          | -                  |

@@ -48,6 +48,10 @@ export default () => {
 
 ## API
 
-| name   | description         | type   | default |
-| ------ | ------------------- | ------ | ------- |
-| path2D | 自定义图形的 Path2D | Path2D | -       |
+| name          | description         | type   | default |
+| ------------- | ------------------- | ------ | ------- |
+| path2D        | 自定义图形的 Path2D | Path2D | -       |
+| shadowColor   | 阴影颜色            | string | -       |
+| shadowBlur    | 阴影模糊度          | number | -       |
+| shadowOffsetX | 阴影水平偏移        | number | -       |
+| shadowOffsetY | 阴影垂直偏移        | number | -       |

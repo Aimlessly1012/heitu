@@ -57,16 +57,20 @@ export default () => {
 
 ## API
 
-| name        | description                            | type                                 | default |
-| ----------- | -------------------------------------- | ------------------------------------ | ------- |
-| x           | x 坐标                                 | number                               | 0       |
-| y           | y 坐标                                 | number                               | 0       |
-| fillStyle   | 填充颜色                               | string                               | #000    |
-| strokeStyle | 描边颜色                               | string                               | #000    |
-| lineWidth   | 描边宽度                               | number                               | 1       |
-| draggable   | 是否可拖动                             | (evt: MouseEvent) => void / boolean; | false   |
-| radius      | 半径                                   | number                               | 0       |
-| startAngle  | 起始角度                               | number                               | 0       |
-| endAngle    | 结束角度                               | number                               | 0       |
-| border      | 边框 // 0 填充 1 只有边框 2 边框和填充 | number                               | 0       |
-| index       | 层级                                   | number                               | 1       |
+| name          | description                            | type                                 | default |
+| ------------- | -------------------------------------- | ------------------------------------ | ------- |
+| x             | x 坐标                                 | number                               | 0       |
+| y             | y 坐标                                 | number                               | 0       |
+| fillStyle     | 填充颜色                               | string                               | #000    |
+| strokeStyle   | 描边颜色                               | string                               | #000    |
+| lineWidth     | 描边宽度                               | number                               | 1       |
+| draggable     | 是否可拖动                             | (evt: MouseEvent) => void / boolean; | false   |
+| radius        | 半径                                   | number                               | 0       |
+| startAngle    | 起始角度                               | number                               | 0       |
+| endAngle      | 结束角度                               | number                               | 0       |
+| border        | 边框 // 0 填充 1 只有边框 2 边框和填充 | number                               | 0       |
+| index         | 层级                                   | number                               | 1       |
+| shadowColor   | 阴影颜色                               | string                               | -       |
+| shadowBlur    | 阴影模糊度                             | number                               | -       |
+| shadowOffsetX | 阴影水平偏移                           | number                               | -       |
+| shadowOffsetY | 阴影垂直偏移                           | number                               | -       |

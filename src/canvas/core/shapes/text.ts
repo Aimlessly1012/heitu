@@ -40,6 +40,10 @@ class Text extends Node {
   width?: number;
   height?: number;
   index = 0;
+  shadowColor: string;
+  shadowBlur: number = 0;
+  shadowOffsetY: number = 0;
+  shadowOffsetX: number = 0;
   constructor(config: IText) {
     super();
     this.content = '';
@@ -54,6 +58,7 @@ class Text extends Node {
     this.textBaseline = 'top' as CanvasTextBaseline;
     this.x = 100;
     this.y = 100;
+    this.shadowColor = 'transparent';
     forIn(config, (value, key) => {
       if (value) (this as any)[key] = value;
     });
@@ -67,7 +72,15 @@ class Text extends Node {
     const textMetrics = ctx.measureText(this.content);
     this.width = textMetrics.width;
     this.height = this.fontSize;
-
+    if (this.shadowColor) {
+      // 设置阴影属性
+      ctx.shadowColor = this.shadowColor; // 阴影颜色
+      ctx.shadowBlur = this.shadowBlur; // 阴影模糊程度
+      ctx.shadowOffsetX = this.shadowOffsetX; // 阴影的水平偏移
+      ctx.shadowOffsetY = this.shadowOffsetY; // 阴影的垂直偏移
+    } else {
+      ctx.shadowColor = 'transparent'; // 取消阴影效果
+    }
     return this;
   }
   inScope(evt: MouseEvent) {

@@ -48,7 +48,7 @@ abstract class Node {
       if (!this.eventListeners[baseEvent]) {
         this.eventListeners[baseEvent] = [];
       }
-      console.log(this.eventListeners[baseEvent]);
+
       this.eventListeners[baseEvent].push({
         name: handler?.name || '',
         handler: handler,
@@ -169,15 +169,11 @@ abstract class Node {
           )[0];
 
           if (topInScopeDragShape) {
-            if (topInScopeDragShape.name === 'Group') {
-              topInScopeDragShape.dragging = true;
-              topInScopeDragShape.children.forEach((child: any) => {
+            if ((topInScopeDragShape as any).name === 'Group') {
+              (topInScopeDragShape as any).dragging = true;
+              (topInScopeDragShape as any).children.forEach((child: any) => {
                 // child.dragging = true;
-                // @ts-ignore
-                child.offsetX = child?.x
-                  ? // @ts-ignore
-                    evt.offsetX - child?.x
-                  : evt.offsetX;
+                child.offsetX = child?.x ? evt.offsetX - child?.x : evt.offsetX;
                 // @ts-ignore
                 child.offsetY = child?.y
                   ? // @ts-ignore
@@ -199,7 +195,6 @@ abstract class Node {
             }
           }
         }
-
         if (!isEmpty(children[i]?.eventListeners) || children[i]?.draggable) {
           this.fire(eventType, {
             evt,
@@ -239,12 +234,8 @@ abstract class Node {
               // @ts-ignore
               const x = rect?.left ? evt.clientX - rect?.left : evt.clientX;
               const y = rect?.top ? evt.clientY - rect?.top : evt.clientY;
-              child.x = child?.offsetX
-                ? x - child?.offsetX
-                : x;
-                child.y = child?.offsetY
-                ? y - child?.offsetY
-                : y;
+              child.x = child?.offsetX ? x - child?.offsetX : x;
+              child.y = child?.offsetY ? y - child?.offsetY : y;
             } else {
               child.x = child?.offsetX ? x - child?.offsetX : x;
               child.y = child?.offsetY ? y - child?.offsetY : y;

@@ -5,8 +5,8 @@ import Container from './container';
 
 interface IOption {
   container: HTMLElement;
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
   backgroundColor?: string;
 }
 const MOUSEENTER = 'mouseenter',
@@ -96,6 +96,8 @@ class Stage extends Container {
   // 监听窗口大小变化
   _resizeDOM() {
     if (this.content && this.canvas) {
+      this.width = this.content.offsetWidth;
+      this.height = this.content.offsetHeight;
       this.canvas.setSize(this.content.offsetWidth, this.content.offsetHeight);
       if (this.canvas?.context) this.batchDraw(this);
     }

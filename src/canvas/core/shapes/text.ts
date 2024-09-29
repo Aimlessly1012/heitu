@@ -68,6 +68,7 @@ class Text extends Node {
     ctx.textBaseline = this.textBaseline as CanvasTextBaseline;
     ctx.textAlign = this.textAlign as CanvasTextAlign;
     ctx.fillStyle = this.fillStyle as string;
+    
     ctx.fillText(this.content as string, this.x, this.y);
     const textMetrics = ctx.measureText(this.content);
     this.width = textMetrics.width;

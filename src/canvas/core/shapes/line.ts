@@ -9,11 +9,12 @@ interface ILine {
   end?: { x: number; y: number };
   points?: number[];
   smooth?: boolean;
-  strokeStyle: string;
-  lineWidth: number;
-  lineCap: 'butt' | 'round' | 'square';
-  lineJoin: 'miter' | 'round' | 'miter';
-  index: number;
+  strokeStyle?: string;
+  lineWidth?: number;
+  lineCap?: 'butt' | 'round' | 'square';
+  lineJoin?: 'miter' | 'round' | 'miter';
+  index?: number;
+  lineDash?: [number, number] | [];
 }
 
 class Line extends Node {
@@ -33,6 +34,8 @@ class Line extends Node {
   shadowBlur: number = 0;
   shadowOffsetY: number = 0;
   shadowOffsetX: number = 0;
+  lineDash: [number, number] | [] = [];
+
   constructor(config: ILine) {
     super();
     this.start = { x: 10, y: 10 };
@@ -103,6 +106,7 @@ class Line extends Node {
     return path2D;
   }
   draw(ctx: CanvasRenderingContext2D) {
+
     const path2D = this.smooth
       ? this.calcSmoothPath2D()
       : this.calcStraightPath2D();
@@ -116,6 +120,11 @@ class Line extends Node {
       ctx.shadowOffsetY = this.shadowOffsetY; // 阴影的垂直偏移
     } else {
       ctx.shadowColor = 'transparent'; // 取消阴影效果
+    }
+    if (this.lineDash.length <= 0) {
+      ctx.setLineDash([]);
+    } else {
+      ctx.setLineDash(this.lineDash);
     }
     ctx.stroke(path2D);
     return this;

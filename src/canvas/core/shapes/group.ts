@@ -30,8 +30,8 @@ class Group extends Container {
   inScope(evt: MouseEvent, ctx: CanvasRenderingContext2D) {
     // 绘制
     return this.getChildren().some((child) => {
-      if (child?.inScope) {
-        return child?.inScope(evt, ctx);
+      if ('inScope' in child && typeof child.inScope === 'function') {
+        return child.inScope(evt, ctx);
       }
       return false;
     });

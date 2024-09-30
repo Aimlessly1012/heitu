@@ -3,7 +3,7 @@ import { Vector2d } from '../type';
 import { Canvas } from './canvas';
 import Container from './container';
 
-interface IOption {
+export interface IOption {
   container: HTMLElement;
   width?: number;
   height?: number;

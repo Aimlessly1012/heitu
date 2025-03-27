@@ -13,12 +13,10 @@ order: 4
 
 LocalStorage 简便操作
 
-## 正在建设中
-
 ## 演示
 
 ```tsx
-import { useLocalStorage } from 'heitu';
+import heitu, { useLocalStorage } from 'heitu';
 
 const Index = () => {
   const [value, setValue, remove] = useLocalStorage('my-key', 'foo');

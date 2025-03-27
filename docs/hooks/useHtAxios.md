@@ -6,6 +6,7 @@ group:
 toc: content
 order: 1
 ---
+
 # useHtAxios
 
 ## 描述
@@ -38,7 +39,7 @@ export default () => {
     const res = await htAxios.get('http://jsonplaceholder.typicode.com/posts', {
       aa: '23123',
     });
-    console.log(res);
+    alert(JSON.stringify(res));
   };
   return (
     <div
@@ -55,7 +56,7 @@ export default () => {
           getInfo();
         }}
       >
-        123
+        请求
       </button>
     </div>
   );

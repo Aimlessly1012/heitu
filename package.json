@@ -84,6 +84,7 @@
     "fflate": "^0.8.2",
     "js-cookie": "^3.0.5",
     "lodash-es": "^4.17.21",
+    "mockjs": "^1.1.0",
     "qs": "^6.13.0",
     "unstated-next": "^1.1.0",
     "urijs": "^1.19.11",

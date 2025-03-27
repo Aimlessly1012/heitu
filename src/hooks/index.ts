@@ -10,6 +10,7 @@ export { default as useImageLoad } from './useImageLoad';
 export { default as useInfiniteScroll } from './useInfiniteScroll';
 export { default as useInView } from './useInView';
 export { default as useLocalStorage } from './useLocalStorage';
+export { default as usePolling } from './usePolling';
 export { default as usePrevious } from './usePrevious';
 export { default as useResizeObserver } from './useResizeObserver';
 export { default as useSessionStorage } from './useSessionStorage';

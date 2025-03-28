@@ -11,7 +11,17 @@ order: 3
 
 ## 描述
 
-取消前一个异步请求的 hook,可以用于下搜索拉列表
+- 一个用于管理可取消异步请求的 Hook，特别适用于搜索、列表加载等需要取消前一个请求的场景。
+
+- 调试请将 network 改为 slow 4G
+
+## 特性
+
+- 自动取消前一个未完成的请求
+- 支持 AbortController 取消机制
+- 适配 axios 请求
+- 防止竞态条件
+- 自动管理加载状态
 
 ## 演示
 
@@ -31,17 +41,15 @@ export default () => {
       return response.data;
     },
   });
-  const [{ value, loading }, fn] = useCancelAsyncFn(
-    async ({ cancelInterceptor }) => {
-      return async (query: string) => {
-        const res = await htAxios
-          .get(`http://jsonplaceholder.typicode.com/posts`)
-          .catch((err) => {
-            console.log(err);
-          });
-        cancelInterceptor();
-        return res;
-      };
+  const [{ loading, value }, fetch] = useCancelAsyncFn(
+    async ({ signal, cancelInterceptor }) => {
+      const response = await await htAxios.get(
+        'http://jsonplaceholder.typicode.com/posts',
+        { aa: 1 },
+        { signal },
+      );
+      const data = response;
+      return data;
     },
     [],
   );
@@ -50,27 +58,37 @@ export default () => {
     <div>
       <button
         onClick={async () => {
-          fn();
+          fetch();
         }}
       >
-        12312
+        获取列表
       </button>
     </div>
   );
 };
 ```
 
-## Arguments
+## API
 
-| name         | description | type                    | default |
-| ------------ | ----------- | ----------------------- | ------- |
-| fn           | 执行的函数  | (...args: any[]) => any | -       |
-| deps         | 依赖项      | any[]                   | -       |
-| initialState | 初始值      | -                       | -       |
+### 参数
 
-## return
+| 参数         | 说明                                          | 类型                                                         | 默认值               |
+| ------------ | --------------------------------------------- | ------------------------------------------------------------ | -------------------- |
+| fn           | 异步函数，接收 cancelInterceptor 用于取消请求 | `(context: { cancelInterceptor: () => void }) => Promise<T>` | -                    |
+| deps         | 依赖数组                                      | `any[]`                                                      | `[]`                 |
+| initialState | 初始状态                                      | `{ loading?: boolean; error?: Error; value?: T }`            | `{ loading: false }` |
 
-| name  | description | type                  | default |
-| ----- | ----------- | --------------------- | ------- |
-| state | 返回值      | {error,loading,value} | -       |
-| fn    | 执行函数    | （any）=>void         | -       |
+### 返回值
+
+| 参数    | 说明         | 类型                                             |
+| ------- | ------------ | ------------------------------------------------ |
+| state   | 异步操作状态 | `{ loading: boolean; error?: Error; value?: T }` |
+| execute | 执行异步函数 | `() => Promise<T>`                               |
+
+### State 状态
+
+| 字段    | 说明         | 类型                 |
+| ------- | ------------ | -------------------- |
+| loading | 是否正在加载 | `boolean`            |
+| error   | 错误信息     | `Error \| undefined` |
+| value   | 请求结果     | `T \| undefined`     |

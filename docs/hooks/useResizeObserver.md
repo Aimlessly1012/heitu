@@ -6,14 +6,14 @@ group:
 toc: content
 order: 1
 ---
+
 # useResizeObserver
 
 ## 描述
 
-获取元素是否在可视范围内的 hook
+用于监听 DOM 元素尺寸变化的 Hook。基于浏览器的 ResizeObserver API，当目标元素的尺寸发生变化时，会触发回调函数。
 
 ## 演示
-
 
 ```tsx
 import React, { useRef, useEffect, useState } from 'react';
@@ -25,7 +25,7 @@ export default () => {
   useResizeObserver(ref, (entries) => {
     const [entry] = entries;
     const { width, height } = entry.contentRect;
-    setSize({width, height});
+    setSize({ width, height });
   });
   return (
     <div>
@@ -42,8 +42,11 @@ export default () => {
 
 ## Arguments
 
-| name | description | type | default |
-| ---- | ----------- | ---- | ------- |
+| 参数名   | 描述                       | 类型                                                                 | 默认值 |
+| -------- | -------------------------- | -------------------------------------------------------------------- | ------ |
+| target   | 需要监听尺寸变化的元素引用 | `RefObject<Element> \| Element`                                      | -      |
+| callback | 尺寸变化时的回调函数       | `(entries: ResizeObserverEntry[], observer: ResizeObserver) => void` | -      |
+| options  | ResizeObserver 的配置选项  | `ResizeObserverOptions`                                              | -      |
 
 ## return
 

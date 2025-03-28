@@ -1,5 +1,6 @@
 export { default as useAsyncFn } from './useAsyncFn';
 export { default as useCancelAsyncFn } from './useCancelAsyncFn';
+export { default as createContainer } from './useContainer';
 export { default as useCookie } from './useCookie';
 export { default as useCountDown } from './useCountDown';
 export { default as useDeepCompareEffect } from './useDeepCompareEffect';

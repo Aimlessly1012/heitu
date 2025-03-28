@@ -49,14 +49,11 @@ export default () => {
 };
 ```
 
-## Arguments
+## API
 
-| name | description | type                     | default |
-| ---- | ----------- | ------------------------ | ------- |
-| fn   | 执行的函数  | (...args: any[]) => void | -       |
-| deps | 依赖项      | any[]                    | -       |
+### 参数
 
-## return
-
-| name | description | type | default |
-| ---- | ----------- | ---- | ------- |
+| 参数   | 说明       | 类型                                      | 默认值 |
+| ------ | ---------- | ----------------------------------------- | ------ |
+| effect | 副作用函数 | `() => void \| (() => void \| undefined)` | -      |
+| deps   | 依赖数组   | `any[]`                                   | -      |

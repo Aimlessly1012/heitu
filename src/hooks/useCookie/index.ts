@@ -10,7 +10,6 @@ const useCookie = (
   options: Cookies.CookieAttributes = defaultOptions,
   defaultValue?: string,
 ) => {
-  
   const [cookieValue, setCookieValue] = useState<UseCookieState>(
     getInitialState(key, defaultValue),
   );

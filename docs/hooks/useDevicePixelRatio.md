@@ -22,17 +22,17 @@ import { useDevicePixelRatio } from 'heitu';
 export default () => {
   const { pixelRatio } = useDevicePixelRatio();
 
-  return <p>Device pixel ratio: {pixelRatio}</p>;
+  return (
+    <div>
+      <p>当前设备像素比: {pixelRatio}</p>
+      <p>说明：在支持缩放的设备上改变缩放比例，数值会实时更新</p>
+    </div>
+  );
 };
 ```
 
-## Arguments
+## 返回值
 
-| name | description | type | default |
-| ---- | ----------- | ---- | ------- |
-
-## return
-
-| name       | description | type   | default |
-| ---------- | ----------- | ------ | ------- |
-| pixelRatio | 设备像素比  | number | -       |
+| 参数名     | 说明             | 类型     | 默认值 |
+| ---------- | ---------------- | -------- | ------ |
+| pixelRatio | 当前设备的像素比 | `number` | 1      |

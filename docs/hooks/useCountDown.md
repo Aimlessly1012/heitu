@@ -19,7 +19,6 @@ order: 2
 import React, { LegacyRef, useEffect } from 'react';
 import { useCountDown } from 'heitu';
 
-
 export default () => {
   const [seconds, startCountDown, stopCountDown] = useCountDown();
   return (
@@ -51,9 +50,11 @@ export default () => {
 };
 ```
 
-## return
+## API
 
-| name           | description                   | type                | default |
-| -------------- | ----------------------------- | ------------------- | ------- |
-| seconds        | 用于展示的倒计时              | number              | 0       |
-| startCountDown | 开始倒计时,传参重置，不传继续 | (num?:number)=>void | false   |
+### 返回值
+
+| 参数           | 说明                          | 类型                  | 默认值 |
+| -------------- | ----------------------------- | --------------------- | ------ |
+| seconds        | 用于展示的倒计时              | `number`              | 0      |
+| startCountDown | 开始倒计时,传参重置，不传继续 | `(num?:number)=>void` | false  |

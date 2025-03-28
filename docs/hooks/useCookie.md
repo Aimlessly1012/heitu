@@ -49,31 +49,42 @@ export default () => {
 
   return (
     <div>
-      <p>Click on the button to update or clear the cookie</p>
+      <p>点击按钮更新或清除cookie</p>
       <p color="blue">cookie: {cookieValue || 'no value'}</p>
-      <button onClick={updateButtonClick}>Update the cookie</button>
-      <button onClick={deleteButtonClick}>Clear the cookie</button>
-      <button onClick={change}>
-        Changing the cookie through other methods
-      </button>
-      <button onClick={refreshCookie}>Refresh the cookie</button>
+      <button onClick={updateButtonClick}>更新 cookie</button>
+      <button onClick={deleteButtonClick}>清除 cookie</button>
+      <button onClick={change}>通过别的方式修改cookie</button>
+      <button onClick={refreshCookie}>刷新 cookie</button>
     </div>
   );
 };
 ```
 
-## Arguments
+## API
 
-| name         | description | type                                                                                                                                   | default |
-| ------------ | ----------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| key          | cookie name | string                                                                                                                                 | -       |
-| options      | cookie opt  | {expires: number/Date,path?: string,domain?: string,secure?: boolean, sameSite?: "strict" / "Strict" / "lax" / "Lax" / "none" / "None} | -       |
-| defaultValue | default val | any                                                                                                                                    | -       |
+### 参数
 
-## return
+| 参数         | 说明          | 类型            | 默认值          |
+| ------------ | ------------- | --------------- | --------------- |
+| key          | Cookie 的名称 | `string`        | -               |
+| options      | Cookie 配置项 | `CookieOptions` | `{ path: '/' }` |
+| defaultValue | 默认值        | `any`           | `undefined`     |
 
-| name          | description      | type                                                                           | default |
-| ------------- | ---------------- | ------------------------------------------------------------------------------ | ------- |
-| cookieValue   | 当前 cookie 的值 | string                                                                         | -       |
-| updateCookie  | 是否在可视范围内 | (newValue: UseCookieState/ (prevState: UseCookieState) =>UseCookieState)=>void | -       |
-| refreshCookie | 刷新 cookie      | () => void                                                                     | -       |
+### CookieOptions
+
+| 参数     | 说明                  | 类型                          | 默认值  |
+| -------- | --------------------- | ----------------------------- | ------- |
+| path     | Cookie 路径           | `string`                      | `'/'`   |
+| domain   | Cookie 域名           | `string`                      | -       |
+| maxAge   | 过期时间（秒）        | `number`                      | -       |
+| expires  | 过期日期              | `Date`                        | -       |
+| secure   | 是否只通过 HTTPS 传输 | `boolean`                     | `false` |
+| sameSite | 跨站点请求设置        | `'strict' \| 'lax' \| 'none'` | -       |
+
+### 返回值
+
+| 参数          | 说明               | 类型                                             |
+| ------------- | ------------------ | ------------------------------------------------ |
+| cookieValue   | 当前 Cookie 值     | `T \| undefined`                                 |
+| updateCookie  | 更新 Cookie 的函数 | `(newValue: T \| ((prevValue: T) => T)) => void` |
+| refreshCookie | 刷新 Cookie 的函数 | `() => void`                                     |

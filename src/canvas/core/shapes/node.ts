@@ -2,6 +2,7 @@ import { isStage } from 'heitu/canvas/utils';
 import { isFunction } from 'heitu/utils/is';
 import { forIn, isEmpty } from 'lodash-es';
 import Stage from '../stage';
+import { ChildType } from '../stage/container';
 
 export type ICoord = { x: number; y: number };
 type NodeEventMap = GlobalEventHandlersEventMap & {
@@ -165,7 +166,7 @@ abstract class Node {
             return item?.inScope(evt, target.canvas?.context);
           });
           const topInScopeDragShape = inScopeDragShape.sort(
-            (a, b) => b.index - a.index,
+            (a: any, b: any) => b.index - a.index,
           )[0];
 
           if (topInScopeDragShape) {
@@ -181,11 +182,11 @@ abstract class Node {
                   : evt.offsetY;
               });
             } else {
-              topInScopeDragShape.dragging = true;
-              // @ts-ignore
-              topInScopeDragShape.offsetX = topInScopeDragShape?.x
-                ? // @ts-ignore
-                  evt.offsetX - topInScopeDragShape?.x
+              (topInScopeDragShape as any).dragging = true;
+              (topInScopeDragShape as any).offsetX = (
+                topInScopeDragShape as any
+              )?.x
+                ? evt.offsetX - (topInScopeDragShape as any)?.x
                 : evt.offsetX;
               // @ts-ignore
               topInScopeDragShape.offsetY = topInScopeDragShape?.y
@@ -195,11 +196,12 @@ abstract class Node {
             }
           }
         }
-        if (!isEmpty(children[i]?.eventListeners) || children[i]?.draggable) {
+        const currentChild = children[i] as ChildType;
+        if (!isEmpty(currentChild?.eventListeners) || currentChild?.draggable) {
           this.fire(eventType, {
             evt,
             target: target,
-            currentTarget: children[i],
+            currentTarget: currentChild,
           });
         }
       }

@@ -20,8 +20,8 @@ class Group extends Container {
     this.deduplication();
     // 绘制
     this.getChildren().forEach((child) => {
-      if (ctx && child?.draw) {
-        child?.draw(ctx);
+      if (ctx && 'draw' in child && typeof child.draw === 'function') {
+        child.draw(ctx);
       }
     });
 

@@ -1,4 +1,3 @@
-import Coordinate from 'heitu/charts/chartBase/coordinate';
 import Stage from '.';
 import Node from '../shapes/node';
 import { Node as INode } from '../type';
@@ -15,7 +14,7 @@ export interface ChildType extends Node {
 }
 
 abstract class Container extends Node {
-  children: Array<ChildType | Coordinate> = [];
+  children: Array<ChildType> = [];
   // 获取 子元素
   getChildren(filterFunc?: (item: INode) => boolean) {
     if (!filterFunc) {
@@ -23,7 +22,7 @@ abstract class Container extends Node {
     }
 
     const children = this.children || [];
-    let results: Array<ChildType | Coordinate> = [];
+    let results: Array<ChildType> = [];
     children.forEach(function (child) {
       if (filterFunc(child)) {
         results.push(child);
@@ -56,7 +55,7 @@ abstract class Container extends Node {
     // this._requestDraw();
     return this;
   }
-  add(...children: ChildType[] | Coordinate[]) {
+  add(...children: ChildType[]) {
     if (children.length === 0) {
       return this;
     }
